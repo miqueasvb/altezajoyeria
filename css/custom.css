@@ -1,0 +1,1135 @@
+/* --- BARRA DE ANUNCIOS SUPERIOR --- */
+  .top-bar-announcement {
+    background: #111;
+    color: #fff;
+    overflow: hidden;
+    height: 35px;
+    line-height: 35px;
+    position: relative;
+    z-index: 1001;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .announcement-slider {
+    display: flex;
+    width: max-content;
+    animation: scroll-infinite 25s linear infinite;
+  }
+
+  .announcement-content {
+    display: flex;
+    white-space: nowrap;
+  }
+
+  .announcement-content span {
+    display: inline-block;
+    padding: 0 60px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+  }
+
+  @keyframes scroll-infinite {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* --- NAVBAR PERSONALIZADO BASE --- */
+  .custom-navbar {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: all 0.3s ease;
+  }
+
+  .site-logo a {
+    border: none !important;
+    padding: 0 !important;
+    background: none !important;
+    display: inline-block !important;
+  }
+  
+  .site-logo img {
+    display: block;
+    margin: 0 auto;
+  }
+
+  .nav-link-custom {
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #333 !important;
+    position: relative;
+    padding: 10px 15px !important;
+    text-decoration: none !important;
+  }
+
+  .nav-link-custom::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: 0;
+    left: 15px;
+    background-color: #000;
+    transition: 0.3s;
+  }
+
+  .nav-link-custom:hover::after {
+    width: calc(100% - 30px);
+  }
+
+  .icons-btn {
+    font-size: 18px !important;
+    margin-left: 18px;
+    color: #333 !important;
+    transition: 0.3s;
+    text-decoration: none !important;
+  }
+
+  .icons-btn:hover {
+    color: #b3925d !important;
+    transform: translateY(-2px);
+  }
+
+  /* --- COMPORTAMIENTO EXCLUSIVO ESCRITORIO (PC / NOTEBOOKS) --- */
+  @media (min-width: 992px) {
+    .custom-navbar {
+      padding-top: 15px !important;
+      padding-bottom: 15px !important;
+    }
+
+    .site-logo {
+      text-align: center !important;
+    }
+
+    /* Estructura Desplegables de Alta Joyería */
+    .site-menu .has-children {
+      position: relative;
+    }
+
+    .site-menu .dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #ffffff !important;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+      padding: 12px 0 !important;
+      min-width: 240px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s ease-in-out;
+      transform: translateY(10px);
+      list-style: none;
+      margin: 0;
+      padding-left: 0 !important;
+      border: 1px solid #f2f0eb;
+      text-align: left;
+      z-index: 999;
+    }
+
+    /* Mostrar nivel al hacer hover en el padre directo */
+    .site-menu .has-children:hover > .dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .site-menu .dropdown li {
+      padding: 0 20px !important;
+      margin: 0 !important;
+      display: block !important;
+      position: relative;
+    }
+
+    .site-menu .dropdown a {
+      font-size: 11px !important;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 600 !important;
+      color: #555 !important;
+      display: block;
+      padding: 8px 0 !important;
+      border-bottom: 1px solid #fcfbf9;
+      text-decoration: none !important;
+    }
+
+    .site-menu .dropdown a:hover {
+      color: #b3925d !important;
+      padding-left: 6px !important;
+      transition: all 0.2s ease;
+    }
+
+    /* Niveles profundos secundarios (Despliegue lateral hacia la derecha) */
+    .site-menu .dropdown .has-children .dropdown {
+      top: 0;
+      left: 100%;
+      margin-top: -13px;
+      border-left: 1px solid #f2f0eb;
+      transform: translateX(10px);
+    }
+
+    .site-menu .dropdown .has-children:hover > .dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0) translateY(0);
+    }
+
+    /* Cuadrícula balanceada para las 14 Marcas de Relojes */
+    .brands-grid {
+      display: grid !important;
+      grid-template-columns: repeat(2, 1fr);
+      min-width: 340px !important;
+      padding: 15px !important;
+      gap: 2px 15px;
+    }
+
+    .brands-grid li {
+      padding: 0 !important;
+    }
+
+    .brands-grid a {
+      border: none !important;
+      padding: 5px 0 !important;
+    }
+  }
+
+  /* --- RESPONSIVE INTERMEDIO (Evita solapamiento en laptops chicas) --- */
+  @media (min-width: 992px) and (max-width: 1230px) {
+    .nav-link-custom {
+      padding: 10px 8px !important;
+      letter-spacing: 1px !important;
+      font-size: 11px !important;
+    }
+    .icons-btn {
+      margin-left: 10px !important;
+      font-size: 16px !important;
+    }
+    .custom-navbar .container {
+      max-width: 100% !important;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+
+  /* --- ESTILO DISPOSITIVOS MÓVILES (Celulares / Tablets) --- */
+  @media (max-width: 991px) {
+    .custom-navbar .row {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+    }
+
+    .site-logo {
+      text-align: left !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      display: flex;
+      align-items: center;
+    }
+
+    .site-logo img {
+      max-height: 40px !important;
+      width: auto;
+    }
+
+    .site-navbar .text-right {
+      padding: 0 !important;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    /* Ajuste fino del Botón Hamburguesa Moderno */
+    .site-menu-toggle {
+      position: relative !important;
+      display: flex !important;
+      align-items: center !important;
+      height: 100%;
+      margin: 0 0 0 15px !important;
+      padding: 0 !important;
+    }
+
+    .modern-burger {
+      width: 24px;
+      height: 16px;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .modern-burger span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: #000;
+      border-radius: 2px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    /* Estructuración Limpia de Listas en el Menú Lateral de la Plantilla */
+    .site-mobile-menu-body .site-nav-wrap {
+      list-style: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    .site-mobile-menu-body .site-nav-wrap a {
+      padding: 12px 20px !important;
+      display: block !important;
+      font-size: 13px !important;
+      font-weight: 700 !important;
+      color: #222 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 1.5px !important;
+      border-bottom: 1px solid #f5f5f3 !important;
+    }
+
+    /* Corrección absoluta de la cascada infinita en celular */
+    .site-mobile-menu-body .site-nav-wrap .dropdown {
+      display: none; /* Controlado dinámicamente por JS del template */
+      position: relative !important;
+      top: 0 !important;
+      left: 0 !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      transform: none !important;
+      box-shadow: none !important;
+      background: #fafaf9 !important;
+      padding: 5px 0 5px 15px !important; /* Desplazamiento visual interno */
+      border: none !important;
+      width: 100% !important;
+    }
+
+    .site-mobile-menu-body .site-nav-wrap .dropdown a {
+      font-size: 12px !important;
+      color: #555 !important;
+      text-transform: none !important;
+      letter-spacing: 1px !important;
+      padding: 8px 20px !important;
+      border: none !important;
+    }
+
+    /* Re-estructurar marcas de relojes en menú móvil (2 columnas) */
+    .site-mobile-menu-body .site-nav-wrap .brands-grid {
+      display: grid !important;
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 4px;
+      padding: 10px 15px !important;
+    }
+
+    .site-mobile-menu-body .site-nav-wrap .brands-grid a {
+      padding: 6px 10px !important;
+    }
+
+    /* Redes sociales flotantes dentro del menú móvil */
+    .site-mobile-menu-body .site-nav-wrap .d-flex {
+      padding: 20px !important;
+      gap: 20px !important;
+      justify-content: flex-start !important;
+    }
+
+    .site-mobile-menu-body .site-nav-wrap .d-flex a {
+      font-size: 20px !important;
+      color: #555 !important;
+      border: none !important;
+      padding: 0 !important;
+    }
+  }
+
+  /* Ajustes estructurales fijos de la X de Cierre Móvil */
+  .site-mobile-menu-close {
+    position: absolute !important;
+    top: 15px !important;
+    right: 15px !important;
+    padding: 10px !important;
+    z-index: 2000 !important;
+    cursor: pointer;
+    display: block !important;
+  }
+
+  .site-mobile-menu-close span {
+    font-size: 28px !important;
+    color: #000 !important;
+  }
+
+  .site-mobile-menu-body {
+    padding-top: 60px !important;
+  }
+
+  .site-mobile-menu-header {
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+  }
+
+
+  @media (max-width: 991px) {
+    /* Evita que los iconos se encimen al logo */
+    .site-logo {
+      text-align: left !important;
+      margin-bottom: 0 !important;
+      padding-left: 15px;
+    }
+    
+    .site-top-icons {
+      text-align: right !important;
+      padding-right: 50px; /* Espacio para las 3 rayitas */
+    }
+
+    .site-top-icons ul li {
+      display: inline-block;
+      margin-left: 5px;
+    }
+
+    /* Ajuste del botón de menú (3 rayitas) */
+    .site-menu-toggle {
+      position: absolute !important;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 99;
+    }
+  }
+
+  /* Forzar visibilidad del botón cerrar en móvil */
+  .site-mobile-menu-close {
+    cursor: pointer;
+    z-index: 1001;
+    padding: 20px;
+    display: block !important;
+  }
+
+  .site-mobile-menu-close span {
+    font-size: 30px;
+    color: #000;
+  }
+    
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .top-bar-announcement {
+    background: #111;
+    color: #fff;
+    overflow: hidden;
+    height: 35px;
+    line-height: 35px;
+    position: relative;
+    z-index: 1001;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .announcement-slider {
+    display: flex;
+    width: max-content;
+    animation: scroll-infinite 25s linear infinite;
+  }
+
+  .announcement-content {
+    display: flex;
+    white-space: nowrap;
+  }
+
+  .announcement-content span {
+    display: inline-block;
+    padding: 0 60px; /* Espacio entre mensajes */
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+  }
+
+  @keyframes scroll-infinite {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      /* Desplaza exactamente la mitad (el bloque original) */
+      transform: translateX(-50%);
+    }
+  }
+
+
+  @keyframes scroll-topbar {
+    0% { transform: translateX(0); }
+    /* Ajustamos para que el desplazamiento sea fluido */
+    100% { transform: translateX(-50%); }
+  }
+
+/* Elimina el !important y usa clases más específicas para ganar prioridad sin romper todo */
+.site-navbar.custom-navbar {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    position: relative; /* Cambia de sticky a relative para evitar que el scroll lo corte */
+    width: 100%;
+    z-index: 1000;
+}
+
+    /* Limpieza total del contenedor del logo */
+    .site-logo a {
+      border: none !important;
+      padding: 0 !important;
+      background: none !important;
+      display: inline-block !important;
+    }
+
+    .site-logo a:hover {
+      background: none !important;
+    }
+    
+    .site-logo img {
+      display: block;
+      margin: 0 auto;
+    }
+
+    .nav-link-custom {
+      font-size: 13px !important;
+      font-weight: 700 !important;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #555 !important;
+      position: relative;
+      padding: 10px 15px !important;
+    }
+
+    .nav-link-custom::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 1px;
+      bottom: 0;
+      left: 15px;
+      background-color: #000;
+      transition: 0.3s;
+    }
+
+    .nav-link-custom:hover::after {
+      width: calc(100% - 30px);
+    }
+
+    .icons-btn {
+      font-size: 18px !important;
+      margin-left: 15px;
+      transition: 0.3s;
+    }
+
+    .icons-btn:hover {
+      color: #000 !important;
+      transform: translateY(-2px);
+    }
+
+    /* Animación para el badge del carrito */
+    .bag .number {
+      background: #000 !important;
+      font-size: 10px;
+      width: 18px;
+      height: 18px;
+      line-height: 18px;
+      top: -5px !important;
+    }
+
+    /* Efecto de brillo y elevación para el botón de Alteza */
+    .custom-btn-alteza:hover {
+      background-color: #ffffff !important;
+      transform: translateY(-3px); /* Se eleva un poquito */
+      box-shadow: 0 10px 20px rgba(255, 255, 255, 0.3), 0 0 15px rgba(255, 255, 255, 0.2); /* Brillo difuso */
+      color: #000 !important;
+    }
+
+  /* Eliminamos el fondo gris de Bootstrap que te bloquea la vista */
+  .modal-backdrop {
+      display: none !important;   
+  }
+
+  /* Creamos nuestro propio fondo oscuro integrado al modal */
+  #productModal {
+      background: rgba(0, 0, 0, 0.7) !important;
+      z-index: 99999 !important;
+  }
+
+  /* Aseguramos que la caja blanca del modal se vea */
+  .modal-dialog {
+      z-index: 100000 !important;
+      margin-top: 10vh;
+  }
+
+  /* Evitamos que el template oculte el modal */
+  .site-wrap {
+      z-index: 1;
+  }
+
+
+  .btn-alteza-minimal {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 18px;
+      background-color: #1a1a1a; /* Negro casi puro */
+      color: #ffffff !important;
+      text-transform: uppercase;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-decoration: none !important;
+      transition: all 0.3s ease;
+      border: 1px solid #1a1a1a;
+  }
+
+  .btn-alteza-minimal:hover {
+      background-color: #ffffff;
+      color: #1a1a1a !important;
+      border-color: #1a1a1a;
+  }
+
+  .btn-alteza-minimal .icon-whatsapp {
+      font-size: 16px;
+      margin-right: 12px;
+  }
+
+  /* Opcional: Si querés que conserve el verde de WhatsApp pero minimal */
+  .btn-alteza-minimal.whatsapp-style {
+      background-color: #075E54;
+      border-color: #075E54;
+  }
+
+  .btn-alteza-minimal.whatsapp-style:hover {
+      background-color: transparent;
+      color: #075E54 !important;
+  }
+
+
+  .site-footer {
+      padding-bottom: 2rem !important; /* Ajusta el espacio interno de abajo */
+      margin-bottom: 0 !important;    /* Elimina cualquier margen externo */
+  }
+
+  /* Forzamos a que el body no tenga scroll extra */
+  body, html {
+      overflow-x: hidden;
+  }
+
+
+  /* Sección Instagram Moderna - MÁS OSCURA */
+  .alteza-insta-section {
+      /* Aumentamos la opacidad del negro (0.6 a la izquierda, 0.8 a la derecha) */
+      background-image: linear-gradient(to right, rgba(0,0,0,0.5), rgba(0,0,0,0.6)), url('images/instagram1.jpg') !important;
+      background-size: cover !important;
+      background-position: center !important;
+      background-attachment: fixed;
+      padding: 100px 0;
+      min-height: 80vh !important;
+      display: flex;
+      align-items: center;
+  }
+
+  .alteza-insta-card {
+      padding: 60px;
+      background: rgba(255, 255, 255, 0.05); /* Efecto Glassmorphism sutil */
+      backdrop-filter: blur(10px); /* Desenfoque de fondo moderno */
+      border-left: 2px solid #b3925d; /* Línea de acento dorada */
+      color: #fff;
+  }
+
+  /* Forzamos el color blanco en toda la sección de texto */
+  .alteza-display-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 60px !important;
+      line-height: 1;
+      font-weight: 900;
+      margin-bottom: 25px;
+      color: #ffffff !important; /* Blanco Puro */
+      text-shadow: 2px 4px 15px rgba(0,0,0,0.5); /* Sombra para que se lea sobre la foto */
+  }
+
+  .alteza-description {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #ffffff !important; /* Blanco Puro */
+      margin-bottom: 40px;
+      font-weight: 400; /* Un poquito más de peso para que no se pierda */
+      text-shadow: 1px 1px 8px rgba(0,0,0,0.5);
+  }
+
+  /* El subtítulo dorado lo mantenemos para que haya contraste de marca, 
+    pero si lo querés blanco también, cambiá el color abajo */
+  .alteza-label {
+      display: block;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 6px;
+      color: #b3925d; /* Este es el dorado Alteza */
+      margin-bottom: 20px;
+      font-weight: 700;
+  }
+
+  /* Botón Minimalista Transparente */
+  .alteza-btn-modern {
+      display: inline-flex;
+      align-items: center;
+      padding: 15px 35px;
+      border: 1px solid #ffffff;
+      color: #ffffff !important;
+      text-decoration: none !important;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: all 0.4s ease;
+  }
+
+  .alteza-btn-modern:hover {
+      background: #ffffff;
+      color: #000000 !important;
+      padding-left: 45px;
+  }
+
+  /* Ajustes para Móviles */
+  @media (max-width: 768px) {
+      .alteza-insta-card {
+          padding: 30px;
+          border-left: none;
+          border-top: 2px solid #b3925d;
+          background: rgba(0,0,0,0.6); /* Más oscuro en móvil para leer bien */
+      }
+      .alteza-display-title { font-size: 40px !important; }
+  }
+
+
+  /* Footer Estilo Alteza */
+  .footer-heading-alteza {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      color: #1a1a1a;
+      font-weight: 700;
+  }
+
+  .footer-text-alteza {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #777;
+  }
+
+  .footer-links-alteza li {
+      margin-bottom: 10px;
+  }
+
+  .footer-links-alteza a {
+      color: #777 !important;
+      font-size: 14px;
+      text-decoration: none !important;
+      transition: 0.3s all;
+  }
+
+  .footer-links-alteza a:hover {
+      color: #b3925d !important; /* Dorado al pasar el mouse */
+  }
+
+  .footer-contact-alteza {
+      font-size: 14px;
+      color: #777;
+  }
+
+  .footer-contact-alteza a {
+      color: #777 !important;
+      text-decoration: none;
+  }
+
+  .footer-social-alteza a {
+      font-size: 20px;
+      color: #1a1a1a;
+      transition: 0.3s all;
+  }
+
+  .footer-social-alteza a:hover {
+      color: #b3925d;
+  }
+
+  .footer-copyright-alteza {
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #bbb;
+  }
+
+
+  /* --- Ajuste final para Medios de Pago --- */
+  .payment-icons-alteza {
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: #999;
+      font-weight: 700;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: center;
+      gap: 20px; /* Espacio entre los nombres de las tarjetas */
+      margin-top: 10px;
+  }
+
+  /* Si decidís usar iconos después, este estilo ya te sirve */
+  .payment-icons-alteza span:hover {
+      color: #b3925d; /* Dorado al pasar el mouse sobre el texto de pago */
+      transition: 0.3s;
+      cursor: default;
+  }
+
+  /* Alineación de navegación en móvil */
+  @media (max-width: 768px) {
+      .footer-links-alteza, .footer-contact-alteza {
+          text-align: center;
+          padding: 0;
+      }
+  }
+
+
+  .footer-payment-img {
+      max-width: 300px; 
+      height: auto;
+      /* Borramos el filter grayscale y el opacity para que se vea normal */
+      transition: 0.3s all ease;
+  }
+
+  /* También podés borrar el hover si ya no querés que cambie nada */
+  .footer-payment-img:hover {
+      transform: scale(1.05); /* Si querés, que solo se agrade un poquito al pasar el mouse */
+  }
+
+
+
+
+
+  /* Estilos Botón Flotante Alteza (Versión Grande) */
+  .whatsapp-float-alteza {
+    position: fixed;
+    /* Aumentamos de 55px a 70px */
+    width: 70px; 
+    height: 70px; 
+    bottom: 30px; 
+    right: 30px;
+    background-color: #25d366; 
+    color: #fff !important;
+    border-radius: 50%;
+    text-align: center;
+    /* Aumentamos el ícono de 30px a 38px */
+    font-size: 38px; 
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+  }
+
+  .whatsapp-float-alteza i {
+    color: #fff !important;
+  }
+
+  .whatsapp-float-alteza:hover {
+    transform: scale(1.1);
+    background-color: #20ba5a;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  }
+
+  /* PC: Recuperamos la franja ancha */
+  @media (min-width: 992px) {
+    .custom-navbar {
+      padding-top: 20px !important;
+      padding-bottom: 20px !important;
+    }
+    .site-logo {
+      text-align: center !important;
+    }
+  }
+
+  /* --- ESTILO MODERNO BURGER (Solo Móvil) --- */
+  @media (max-width: 991px) {
+    
+    /* Contenedor Flex para alineación perfecta */
+    .custom-navbar .row {
+      display: flex !important;
+      align-items: center !important; /* Alineación vertical central */
+      justify-content: space-between !important;
+    }
+
+/* Aseguramos que el logo no tenga márgenes que rompan simetría */
+.site-logo {
+  text-align: left !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  line-height: 0; 
+  display: flex;
+  align-items: center;
+}
+/* AGREGÁ O MODIFICÁ ESTO PARA EL TAMAÑO */
+.site-logo img {
+  /* Bajá este número para achicarlo o subilo para agrandarlo */
+  max-height: 50px !important; 
+  width: auto;
+  display: block;
+}
+
+    /* Contenedor de iconos/botón a la derecha */
+    .site-navbar .text-right {
+      padding: 0 !important;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+.site-menu-toggle {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    height: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    
+    /* MODIFICA ESTE VALOR PARA SUBIR O BAJAR */
+    /* Un número positivo (ej: 2px) lo baja, uno negativo (ej: -2px) lo sube */
+    transform: translateY(0px) !important; 
+}
+
+    /* Estructura del Modern Burger */
+    .modern-burger {
+      width: 25px;
+      height: 18px;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Las 3 líneas */
+    .modern-burger span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: #000; /* Color Negro Alteza */
+      border-radius: 2px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    /* --- ANIMACIÓN A "X" CUANDO EL MENÚ ESTÁ ABIERTO --- */
+    /* El JS de tu template añade la clase 'offcanvas-menu' al body */
+    body.offcanvas-menu .modern-burger span:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+
+    body.offcanvas-menu .modern-burger span:nth-child(2) {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+
+    body.offcanvas-menu .modern-burger span:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+  }
+
+  /* Esto quita el subrayado y ajustes de texto a los iconos del menú móvil */
+.site-mobile-menu-body .site-nav-wrap .d-flex a {
+    padding: 0 !important;
+}
+.site-mobile-menu-body .site-nav-wrap .d-flex a:after {
+    display: none !important; /* Quita la rayita de hover */
+}
+
+/* Ajuste de precisión para la X del menú móvil */
+.site-mobile-menu-close {
+    position: absolute !important;
+    top: 20px !important;    /* Distancia desde el tope */
+    right: 20px !important;  /* Distancia desde el borde derecho */
+    padding: 10px !important;
+    line-height: 1 !important;
+    z-index: 2000 !important;
+    cursor: pointer;
+}
+
+.site-mobile-menu-close span {
+    font-size: 32px !important; /* Tamaño más legible */
+    color: #000 !important;
+    display: block !important;
+}
+
+/* Espaciado para que el texto del menú no choque con la X */
+.site-mobile-menu-body {
+    padding-top: 70px !important; 
+}
+
+/* Eliminamos cualquier rastro del encabezado anterior que pueda empujar la X */
+.site-mobile-menu-header {
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+}
+
+/* Alineación y color de iconos en el menú móvil */
+.site-mobile-menu-body .site-nav-wrap .d-flex {
+    justify-content: flex-start !important; /* Los lleva a la izquierda con el resto */
+    gap: 20px !important; /* Espacio entre los dos iconos */
+    padding-left: 20px; /* Alineación con el texto de arriba */
+}
+
+.site-mobile-menu-body .site-nav-wrap .d-flex a {
+    color: #545454 !important; /* El color gris que pediste */
+    font-size: 22px !important; /* Tamaño equilibrado */
+    transition: 0.3s;
+}
+
+.site-mobile-menu-body .site-nav-wrap .d-flex a:hover {
+    color: #b89a5b !important; /* Dorado opcional al pasar el dedo/mouse */
+}
+
+/* Quitamos cualquier margen extra del <li> que los contiene */
+.site-mobile-menu-body .site-nav-wrap li.mt-4 {
+    margin-top: 20px !important;
+}
+
+/* Footer: Alineación Total a la Izquierda en Celular */
+@media (max-width: 767px) {
+  .site-footer {
+    text-align: left !important;
+    padding-left: 15px !important; /* Margen de seguridad con el borde de la pantalla */
+    padding-right: 15px !important;
+  }
+
+  .footer-heading-alteza {
+    text-align: left !important;
+    margin-top: 30px !important;
+    margin-bottom: 15px !important;
+    padding-left: 0 !important;
+  }
+
+  /* Alineación de las listas (Inicio, Joyas, Teléfono, etc.) */
+  .footer-links-alteza, 
+  .footer-contact-alteza {
+    padding-left: 0 !important; /* Quitamos el espacio que traen las <ul> */
+    margin-left: 0 !important;
+    list-style: none !important;
+  }
+
+  .footer-links-alteza li, 
+  .footer-contact-alteza li {
+    text-align: left !important;
+    margin-bottom: 12px !important;
+  }
+
+  /* Redes Sociales a la izquierda */
+  .footer-social-alteza {
+    display: flex !important;
+    justify-content: flex-start !important;
+    padding-left: 0 !important;
+    margin-left: -8px !important; /* Ajuste para que el icono alinee con el texto */
+    gap: 10px;
+  }
+
+  /* Imagen de Medios de Pago a la izquierda */
+  .payment-image-container {
+    display: flex !important;
+    justify-content: flex-start !important;
+    padding-left: 0 !important;
+  }
+
+  .footer-payment-img {
+    margin-left: 0 !important;
+  }
+}
+
+/* --- ARQUITECTURA DE MENÚS DESPLEGABLES EDITORIALES --- */
+.site-menu .has-children {
+  position: relative;
+}
+
+.site-menu .dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #ffffff !important;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+  padding: 15px 0 !important;
+  min-width: 240px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  transform: translateY(10px);
+  list-style: none;
+  margin: 0;
+  padding-left: 0 !important;
+  border: 1px solid #f2f0eb;
+  text-align: left;
+  z-index: 999;
+}
+
+/* Mostrar primer nivel al hacer Hover */
+.site-menu .has-children:hover > .dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.site-menu .dropdown li {
+  padding: 0 20px !important;
+  margin: 0 !important;
+  display: block !important;
+}
+
+.site-menu .dropdown a {
+  font-size: 11px !important;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 600 !important;
+  color: #666 !important;
+  display: block;
+  padding: 8px 0 !important;
+  border-bottom: 1px solid #fcfbf9;
+  text-decoration: none !important;
+}
+
+.site-menu .dropdown a:hover {
+  color: #b3925d !important;
+  padding-left: 4px !important;
+  transition: all 0.2s ease;
+}
+
+/* Segundo nivel de desplegables (Anillos, Aros, etc.) */
+.site-menu .dropdown .has-children .dropdown {
+  top: 0;
+  left: 100%;
+  margin-top: -15px;
+  border-left: 1px solid #f2f0eb;
+}
+
+/* Cuadrícula optimizada para las 14 marcas de Relojes */
+.brands-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr);
+  min-width: 320px !important;
+  padding: 20px !important;
+  gap: 5px 15px;
+}
+
+.brands-grid li {
+  padding: 0 !important;
+}
+
+.brands-grid a {
+  border: none !important;
+  padding: 5px 0 !important;
+}
+
+/* Corrección de flechas indicadoras nativas del script */
+.site-menu .has-children > a {
+  position: relative;
+}
