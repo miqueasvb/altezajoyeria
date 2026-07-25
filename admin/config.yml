@@ -37,17 +37,17 @@ collections:
               - { label: "Precio Anterior (Tachado, opcional)", name: "old_price", widget: "string", required: false }
               - { label: "Imagen", name: "image", widget: "image" }
 
-  - name: "catalogo"
+- name: "catalogo"
     label: "Catálogo General"
     files:
       - file: "content/productos.json"
         label: "Lista de Productos del Catálogo"
-        name: "productos"
+        name: "productos_file"
         fields:
-          - name: "productos"
-            label: "Productos"
+          - label: "Productos del Catálogo"
+            name: "productos"
             widget: "list"
-            summary: '{{fields.nombre}} - {{fields.material}} {{fields.tipo}}'
+            summary: '{{fields.nombre}} - {{fields.tipo}}'
             fields:
               - { label: "ID Único", name: "id", widget: "string", default: "prod-1" }
               - { label: "Nombre del Producto", name: "nombre", widget: "string" }
