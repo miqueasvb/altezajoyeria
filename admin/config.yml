@@ -1,0 +1,19 @@
+backend:
+  name: github
+  repo: miqueasvb/altezajoyeria # Tu usuario y repositorio exacto
+  branch: main # O master, según cómo se llame tu rama principal
+
+media_folder: "images" # Dónde se guardarán las fotos que subas
+public_folder: "/images" # Ruta pública para mostrar las fotos en la web
+
+collections:
+  - name: "destacados"
+    label: "Productos Destacados"
+    folder: "content/destacados"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Nombre del Producto", name: "nombre", widget: "string" }
+      - { label: "Precio Actual", name: "precio_actual", widget: "string" }
+      - { label: "Precio Anterior / Tachado (Opcional)", name: "precio_anterior", widget: "string", required: false }
+      - { label: "Imagen del Producto", name: "imagen", widget: "image" }
