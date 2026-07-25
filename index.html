@@ -658,7 +658,7 @@ header.site-navbar .container {
   </div>
 </section>
 
-  <div id="seccion-joyas" class="site-section">
+<div id="seccion-joyas" class="site-section">
     <div class="container">
       <div class="row">
         <div class="title-section mb-5 col-12">
@@ -668,7 +668,7 @@ header.site-navbar .container {
           </div>
         </div>
       </div>
-      <div class="row">
+      <div class="row" id="productos-destacados-container">
         <div class="col-lg-4 col-md-6 item-entry mb-4"><a href="#" class="product-item md-height bg-gray d-block open-modal" data-name="Anillo Classic" data-price="$200.000" data-img="images/ring1.png"><img src="images/ring1.png" alt="Image" class="img-fluid"></a><h2 class="item-title"><a href="#">Anillo Classic</a></h2><strong class="item-price">$200.000</strong></div>
         <div class="col-lg-4 col-md-6 item-entry mb-4"><a href="#" class="product-item md-height bg-gray d-block open-modal" data-name="Anillo de oro 18 quilates" data-price="$175.000" data-img="images/ring2.webp"><img src="images/ring2.webp" alt="Image" class="img-fluid"></a><h2 class="item-title"><a href="#">Anillo de oro 18 quilates</a></h2><strong class="item-price"><del>$250.000</del> $175.000</strong></div>
         <div class="col-lg-4 col-md-6 item-entry mb-4"><a href="#" class="product-item md-height bg-gray d-block open-modal" data-name="Gargantilla Plata" data-price="$76.000" data-img="images/collar1.webp"><img src="images/collar1.webp" alt="Image" class="img-fluid"></a><h2 class="item-title"><a href="#">Collar Corazón de Plata</a></h2><strong class="item-price"><del>$90.000</del> $76.000</strong></div>
@@ -676,6 +676,8 @@ header.site-navbar .container {
         <div class="col-lg-4 col-md-6 item-entry mb-4"><a href="#" class="product-item md-height bg-gray d-block open-modal" data-name="Aros Brillantes" data-price="$175.000" data-img="images/arito1.webp"><img src="images/arito1.webp" alt="Image" class="img-fluid"></a><h2 class="item-title"><a href="#">Aros Brillantes</a></h2><strong class="item-price"><del>$300.000</del> $175.000</strong></div>
         <div class="col-lg-4 col-md-6 item-entry mb-4"><a href="#" class="product-item md-height bg-gray d-block open-modal" data-name="Anillo Compromiso" data-price="$58.000" data-img="images/ring1.png"><img src="images/ring1.png" alt="Image" class="img-fluid"></a><h2 class="item-title"><a href="#">Anillo Compromiso</a></h2><strong class="item-price">$58.000</strong></div>
       </div>
+    </div>
+  </div>
 
   <div id="seccion-relojes" class="site-section">
     <div class="container">
@@ -857,6 +859,20 @@ header.site-navbar .container {
   });
   </script>
 
+<script>
+  async function cargarDestacados() {
+    try {
+      // Keystatic guarda los JSON en content/destacados/ (puedes listar o precargar un índice)
+      // O si preferís una integración ultra rápida por fetch de archivos estáticos:
+      const response = await fetch('./content/destacados/index.json'); // O la lista de slugs
+      // Si prefieres gestionarlo por API de GitHub o cargarlos directamente:
+    } catch (e) {
+      console.log("Cargando productos por defecto o esperando conexión con panel...");
+    }
+  }
+  cargarDestacados();
+</script>
+    
   </div><!-- /.site-wrap -->
   </div><!-- /.site-navbar -->
   </body>
