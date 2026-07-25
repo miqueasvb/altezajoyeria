@@ -134,7 +134,7 @@ collections:
 
   - name: "soporte"
     label: "💬 Soporte y Ayuda"
-    description: "👋 ¡Bienvenido al Panel de Control! — 📌 INSTRUCCIONES: 1. Para agregar o modificar productos entrá a 'Catálogo General'. 2. Si editás la barra superior entrá a 'Página Principal'. 3. Acordate de presionar siempre 'Publicar' para guardar tus cambios. — 📲 CUALQUIER DUDA O CONSULTA TÉCNICA COMUNICATE VÍA WHATSAPP."
+    description: "Hola 👋, soy Miqueas Vico, dueño de Rubit Studios, emprendimiento de diseño y desarrollo web. Te comento un poco acerca del panel administrativo: Los cambios que realices en el panel se actualizarán en la página entre los siguientes 30 - 60 segundos, cualquier problema o duda que tengas, no dudes en mandar mensale al 3644247775."
     files:
       - name: "info_soporte"
         label: " "
