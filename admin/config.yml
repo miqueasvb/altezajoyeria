@@ -49,7 +49,6 @@ collections:
             widget: "list"
             summary: '{{fields.nombre}} - {{fields.tipo}}'
             fields:
-              - { label: "ID Único", name: "id", widget: "string", default: "prod-1" }
               - { label: "Nombre del Producto", name: "nombre", widget: "string" }
               - { label: "Precio ($)", name: "precio", widget: "number", value_type: "int" }
               - { label: "Imagen", name: "imagen", widget: "image" }
