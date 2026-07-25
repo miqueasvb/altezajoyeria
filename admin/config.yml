@@ -134,13 +134,10 @@ collections:
 
   - name: "soporte"
     label: "💬 Soporte y Ayuda"
-    description: "Instrucciones de uso del panel y contacto directo de asistencia."
+    description: "👋 ¡Bienvenido al Panel de Control! — 📌 INSTRUCCIONES: 1. Para agregar o modificar productos entrá a 'Catálogo General'. 2. Si editás la barra superior entrá a 'Página Principal'. 3. Acordate de presionar siempre 'Publicar' para guardar tus cambios. — 📲 CUALQUIER DUDA O CONSULTA TÉCNICA COMUNICATE VÍA WHATSAPP."
     files:
-      - name: "guia_usuario"
-        label: "Manual de Uso y Contacto"
+      - name: "info_soporte"
+        label: " "
         file: "content/soporte.json"
         fields:
-          - { label: "Título", name: "titulo", widget: "string" }
-          - { label: "Mensaje de Bienvenida", name: "mensaje_bienvenida", widget: "text" }
-          - { label: "Guía / Instrucciones", name: "instrucciones", widget: "markdown" }
-          - { label: "Contacto de Desarrollo", name: "whatsapp", widget: "string" }
+          - { label: "Nota de desarrollo", name: "nota", widget: "hidden", default: "Sección informativa" }
