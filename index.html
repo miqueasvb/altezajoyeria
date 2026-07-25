@@ -658,21 +658,24 @@ header.site-navbar .container {
   </div>
 </section>
 
-<div id="seccion-joyas" class="site-section">
-  <div class="container">
-    <div class="row">
-      <div class="title-section mb-5 col-12">
-        <div style="display: flex; align-items: center;">
-          <h2 class="text-uppercase" style="margin-right: 25px; font-weight: 900; letter-spacing: 5px; font-size: 24px; color: #1a1a1a; margin-bottom: 0; white-space: nowrap;"><span style="position: relative; display: inline-block;"><span style="position: absolute; top: -32px; left: 50%; transform: translateX(-50%); color: #b3925d;"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5M19 19C19 19.55 18.55 20 18 20H6C5.45 20 5 19.55 5 19V18H19V19Z"/></svg></span>Destacados</span></h2>
-          <div style="flex-grow: 1; height: 1px; background: #ccc;"></div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Aquí se inyectarán las tarjetas dinámicamente -->
-    <div class="row" id="contenedor-destacados">
-    </div>
+<div class="row" id="contenedor-destacados">
+  {% for p in site.data.alteza_destacados.productos_destacados_list %}
+  <div class="col-lg-4 col-md-6 item-entry mb-4">
+    <a href="#" class="product-item md-height bg-gray d-block open-modal" 
+       data-name="{{ p.titulo }}" 
+       data-price="{{ p.precio }}" 
+       data-img="{{ p.imagen }}">
+      <img src="{{ p.imagen }}" alt="{{ p.titulo }}" class="img-fluid">
+    </a>
+    <h2 class="item-title"><a href="#">{{ p.titulo }}</a></h2>
+    <strong class="item-price">
+      {% if p.precio_anterior != "" and p.precio_anterior != nil %}
+        <del>{{ p.precio_anterior }}</del>
+      {% endif %}
+      {{ p.precio }}
+    </strong>
   </div>
+  {% endfor %}
 </div>
 
   <div id="seccion-relojes" class="site-section">
