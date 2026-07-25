@@ -8,8 +8,7 @@
     "genero": "dama",
     "sub": "con-piedras",
     "marca": "",
-    "imagen": "images/anillo-plata.jpg",
-    "destacado": true
+    "imagen": "images/anillo-plata.jpg"
   },
   {
     "id": "prod-2",
@@ -20,7 +19,6 @@
     "genero": "caballero",
     "sub": "",
     "marca": "citizen",
-    "imagen": "images/reloj-citizen.jpg",
-    "destacado": false
+    "imagen": "images/reloj-citizen.jpg"
   }
 ]
