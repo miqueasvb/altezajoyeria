@@ -1346,19 +1346,18 @@ a {
 .top-bar-track {
   display: flex;
   align-items: center;
-  justify-content: space-around;
   flex-shrink: 0;
   min-width: 100%;
-  gap: 1.25rem; /* 👈 Espacio corto y fluido */
-  padding-right: 1.25rem; /* 👈 Mismo valor que el gap para el bucle perfecto */
-  animation: marqueeHorizontal 18s linear infinite;
+  gap: 1.5rem; /* 👈 Este es el ÚNICO espacio real entre textos */
+  padding-right: 1.5rem; /* Mismo valor que el gap */
+  animation: marqueeHorizontal 20s linear infinite;
 }
 
 /* Punto separador entre mensajes */
 .top-bar-item::after {
   content: "•";
-  color: #d4af37; /* Dorado */
-  margin-left: 1.25rem;
+  color: #d4af37;
+  margin-left: 1.5rem; /* Mismo espacio para equilibrar la viñeta */
   opacity: 0.6;
 }
 
