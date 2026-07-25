@@ -132,8 +132,7 @@ collections:
                   - { label: "Calvin Klein", value: "calvin-klein" }
                   - { label: "Knock Out", value: "knock-out" }
 
-
-                  - name: "soporte"
+  - name: "soporte"
     label: "💬 Soporte y Ayuda"
     description: "Instrucciones de uso del panel y contacto directo de asistencia."
     files:
