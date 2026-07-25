@@ -1325,67 +1325,60 @@ a {
 
 
 /* ==========================================
-   TOP BAR ANNOUNCEMENT - PREMIUM LUXURY
+   TOP BAR ANNOUNCEMENT - INFINITE MARQUEE
    ========================================== */
 .top-bar-announcement {
   background-color: #0f0f0f;
-  color: #d4af37;
+  color: #f4f4f4;
   font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   height: 38px;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
   overflow: hidden;
+  position: relative;
   border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+  user-select: none;
 }
 
+/* Pista que se desplaza infinitamente */
 .top-bar-track {
-  position: relative;
-  width: 100%;
-  max-width: 1200px;
-  height: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: space-around;
+  flex-shrink: 0;
+  min-width: 100%;
+  gap: 4rem; /* 👈 Espaciado amplio y elegante entre mensajes */
+  padding-right: 4rem;
+  animation: marqueeHorizontal 25s linear infinite; /* Ajustá los segundos si querés más rápido/lento */
+}
+
+/* Pausa suave al pasar el cursor */
+.top-bar-announcement:hover .top-bar-track {
+  animation-play-state: paused;
 }
 
 .top-bar-item {
-  position: absolute;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  opacity: 0;
-  transform: translateY(100%);
-  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
-              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  pointer-events: none;
-  width: 100%;
-  padding: 0 16px;
-  text-align: center;
-  color: #f4f4f4;
-}
-
-/* Estado activo: visible en el centro */
-.top-bar-item.active {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-/* Estado de salida: sube hacia arriba esfumándose */
-.top-bar-item.exit {
-  opacity: 0;
-  transform: translateY(-100%);
+  gap: 10px;
+  white-space: nowrap;
 }
 
 .top-bar-icon {
   width: 14px;
   height: 14px;
-  stroke: #d4af37;
+  stroke: #d4af37; /* Tono dorado */
   flex-shrink: 0;
+}
+
+/* Animación fluida de traslación */
+@keyframes marqueeHorizontal {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }
