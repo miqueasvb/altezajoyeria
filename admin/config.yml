@@ -37,7 +37,7 @@ collections:
               - { label: "Precio Anterior (Tachado, opcional)", name: "old_price", widget: "string", required: false }
               - { label: "Imagen", name: "image", widget: "image" }
 
-- name: "catalogo"
+  - name: "catalogo"
     label: "Catálogo General"
     files:
       - file: "content/productos.json"
@@ -103,3 +103,11 @@ collections:
                   - { label: "Swatch", value: "swatch" }
                   - { label: "Tissot", value: "tissot" }
                   - { label: "Seiko", value: "seiko" }
+                  - { label: "Cat", value: "cat" }
+                  - { label: "Orient", value: "orient" }
+                  - { label: "Tommy Hilfiger", value: "tommy-hilfiger" }
+                  - { label: "Tressa", value: "tressa" }
+                  - { label: "Election", value: "election" }
+                  - { label: "Lacoste", value: "lacoste" }
+                  - { label: "Calvin Klein", value: "calvin-klein" }
+                  - { label: "Knock Out", value: "knock-out" }
