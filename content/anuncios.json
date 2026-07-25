@@ -6,11 +6,15 @@
     },
     {
       "texto": "10% OFF EN EFECTIVO O TRANSFERENCIA",
-      "icono": "descuento"
+      "icono": "ninguno"
     },
     {
       "texto": "ENVÍOS SIN CARGO EN SÁENZ PEÑA",
-      "icono": "envio"
+      "icono": "ninguno"
+    },
+    {
+      "icono": "ninguno",
+      "texto": "TESTING VICO"
     }
   ]
 }
