@@ -6,7 +6,27 @@
   <title>Panel de Administración - Alteza</title>
 </head>
 <body>
+  <!-- Scripts de Netlify Identity y Decap CMS -->
   <script src="https://identity.netlify.com/v1/netlify-identity.js"></script>
   <script src="https://unpkg.com/decap-cms@^3.0/dist/decap-cms.js"></script>
+
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+
+      // Detectar si venimos de un link de invitación o recuperación
+      if (window.location.hash.includes('invite_token') || window.location.hash.includes('recovery_token')) {
+        window.netlifyIdentity.on('init', () => {
+          window.netlifyIdentity.open();
+        });
+      }
+    }
+  </script>
 </body>
 </html>
