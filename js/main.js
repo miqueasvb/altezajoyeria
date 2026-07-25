@@ -124,3 +124,136 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .catch(error => console.error('Error al cargar novedades:', error));
 });
+
+
+
+let PRODUCTOS = [];
+
+// 1. Cargar datos del JSON de GitHub
+async function cargarCatalogo() {
+  try {
+    const respuesta = await fetch('content/productos.json');
+    PRODUCTOS = await respuesta.json();
+    
+    // Una vez cargados los productos actualizamos la interfaz
+    actualizarContadoresSidebar();
+    filtrarYRenderizar();
+  } catch (error) {
+    console.error("Error al cargar los productos:", error);
+  }
+}
+
+// 2. Función que calcula automáticamente los números al lado de cada checkbox (ej: Plata 925 -> Anillos (3))
+function actualizarContadoresSidebar() {
+  // Contadores por combo Material|Tipo (ej: plata|anillos)
+  document.querySelectorAll('[data-count-combo]').forEach(el => {
+    const combo = el.getAttribute('data-count-combo'); // ej: "plata|anillos"
+    const [mat, tipo] = combo.split('|');
+    const total = PRODUCTOS.filter(p => p.material === mat && p.tipo === tipo).length;
+    el.textContent = total > 0 ? `(${total})` : '(0)';
+  });
+
+  // Contadores por Género
+  document.querySelectorAll('[data-count-genero]').forEach(el => {
+    const genero = el.getAttribute('data-count-genero');
+    const total = PRODUCTOS.filter(p => p.genero === genero).length;
+    el.textContent = total > 0 ? `(${total})` : '(0)';
+  });
+
+  // Contadores por Detalle/Sub
+  document.querySelectorAll('[data-count-sub]').forEach(el => {
+    const sub = el.getAttribute('data-count-sub');
+    const total = PRODUCTOS.filter(p => p.sub === sub).length;
+    el.textContent = total > 0 ? `(${total})` : '(0)';
+  });
+
+  // Contadores por Marca
+  document.querySelectorAll('[data-count-marca]').forEach(el => {
+    const marca = el.getAttribute('data-count-marca');
+    const total = PRODUCTOS.filter(p => p.marca === marca).length;
+    el.textContent = total > 0 ? `(${total})` : '(0)';
+  });
+}
+
+// 3. Lógica principal de Filtros y Orden
+function filtrarYRenderizar() {
+  // Obtener seleccionados
+  const combosSeleccionados = Array.from(document.querySelectorAll('input[data-group="combo"]:checked')).map(i => i.value);
+  const generosSeleccionados = Array.from(document.querySelectorAll('input[data-group="genero"]:checked')).map(i => i.value);
+  const subsSeleccionados = Array.from(document.querySelectorAll('input[data-group="sub"]:checked')).map(i => i.value);
+  const marcasSeleccionadas = Array.from(document.querySelectorAll('input[data-group="marca"]:checked')).map(i => i.value);
+
+  const precioDesde = parseFloat(document.getElementById('precioDesde')?.value) || 0;
+  const precioHasta = parseFloat(document.getElementById('precioHasta')?.value) || Infinity;
+  const orden = document.getElementById('ordenSelect')?.value || 'destacado';
+
+  // Filtrar
+  let resultado = PRODUCTOS.filter(p => {
+    // Filtro Categoría/Material (combo)
+    if (combosSeleccionados.length > 0) {
+      const pCombo = `${p.material}|${p.tipo}`;
+      if (!combosSeleccionados.includes(pCombo)) return false;
+    }
+
+    // Filtro Género
+    if (generosSeleccionados.length > 0 && !generosSeleccionados.includes(p.genero)) {
+      return false;
+    }
+
+    // Filtro Subcategoría
+    if (subsSeleccionados.length > 0 && !subsSeleccionados.includes(p.sub)) {
+      return false;
+    }
+
+    // Filtro Marca (Relojes)
+    if (marcasSeleccionadas.length > 0 && !marcasSeleccionadas.includes(p.marca)) {
+      return false;
+    }
+
+    // Filtro Rango de Precio
+    if (p.precio < precioDesde || p.precio > precioHasta) {
+      return false;
+    }
+
+    return true;
+  });
+
+  // Ordenar
+  if (orden === 'precio-asc') resultado.sort((a, b) => a.precio - b.precio);
+  if (orden === 'precio-desc') resultado.sort((a, b) => b.precio - a.precio);
+  if (orden === 'nombre-asc') resultado.sort((a, b) => a.nombre.localeCompare(b.nombre));
+
+  // Renderizar Grilla
+  const grid = document.getElementById('productosGrid');
+  const countEl = document.getElementById('resultCount');
+  
+  if (countEl) countEl.textContent = resultado.length;
+
+  if (resultado.length === 0) {
+    grid.innerHTML = '';
+    document.getElementById('catalogoEmpty').style.display = 'block';
+  } else {
+    document.getElementById('catalogoEmpty').style.display = 'none';
+    grid.innerHTML = resultado.map(p => `
+      <div class="col-6 col-md-4 mb-4">
+        <div class="card-producto">
+          <img src="${p.imagen}" alt="${p.nombre}" class="img-fluid">
+          <h3>${p.nombre}</h3>
+          <p class="precio">$${p.precio.toLocaleString('es-AR')}</p>
+        </div>
+      </div>
+    `).join('');
+  }
+}
+
+// Event Listeners para cambios en los checkboxes y ordenamiento
+document.addEventListener('change', (e) => {
+  if (e.target.matches('input[type="checkbox"], #ordenSelect')) {
+    filtrarYRenderizar();
+  }
+});
+
+document.getElementById('aplicarPrecio')?.addEventListener('click', filtrarYRenderizar);
+
+// Inicializar al cargar el DOM
+document.addEventListener('DOMContentLoaded', cargarCatalogo);
