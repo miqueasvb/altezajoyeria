@@ -1,26 +1,36 @@
 {
   "productos": [
     {
-      "id": "prod-1",
-      "nombre": "Anillo Plata Flor 925",
+      "sub": "con-piedras",
       "precio": 45000,
       "material": "plata",
-      "tipo": "anillos",
+      "nombre": "Anillo Plata Flor 925",
       "genero": "dama",
-      "sub": "con-piedras",
-      "marca": "",
-      "imagen": "images/anillo-plata.jpg"
+      "imagen": "images/anillo-plata.jpg",
+      "tipo": "anillos",
+      "id": "prod-1",
+      "marca": ""
     },
     {
-      "id": "prod-2",
-      "nombre": "Reloj Citizen Eco-Drive",
+      "sub": "",
       "precio": 280000,
       "material": "",
-      "tipo": "relojes",
+      "nombre": "Reloj Citizen Eco-Drive",
       "genero": "caballero",
-      "sub": "",
+      "imagen": "images/reloj-citizen.jpg",
+      "tipo": "relojes",
+      "id": "prod-2",
+      "marca": "citizen"
+    },
+    {
+      "id": "prod-1",
+      "material": "",
+      "tipo": "relojes",
       "marca": "citizen",
-      "imagen": "images/reloj-citizen.jpg"
+      "genero": "caballero",
+      "precio": 40,
+      "nombre": "Reloj Citizen PANEL",
+      "imagen": "images/cadena.jpg"
     }
   ]
 }
