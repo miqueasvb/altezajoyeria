@@ -1,10 +1,10 @@
 backend:
   name: github
-  repo: miqueasvb/altezajoyeria # Tu usuario y repositorio exacto
-  branch: main # O master, según cómo se llame tu rama principal
+  repo: miqueasvb/altezajoyeria
+  branch: main
 
-media_folder: "images" # Dónde se guardarán las fotos que subas
-public_folder: "/images" # Ruta pública para mostrar las fotos en la web
+media_folder: "images"
+public_folder: "/images"
 
 collections:
   - name: "destacados"
