@@ -87,3 +87,40 @@ jQuery(document).ready(function($) {
 
 
 });
+
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Cargar Novedades desde el JSON de Decap CMS
+  fetch('/content/novedades.json')
+    .then(response => response.json())
+    .then(data => {
+      const contenedor = document.getElementById('contenedor-novedades');
+      if (!contenedor) return;
+
+      contenedor.innerHTML = data.productos.map(prod => {
+        // Si tiene precio anterior, lo muestra tachado
+        const precioHTML = prod.old_price && prod.old_price.trim() !== "" 
+          ? `<del>${prod.old_price}</del> ${prod.price}`
+          : `${prod.price}`;
+
+        return `
+          <div class="col-lg-4 col-md-6 item-entry mb-4">
+            <a href="#" class="product-item md-height bg-gray d-block open-modal" 
+               data-name="${prod.name}" 
+               data-price="${prod.price}" 
+               data-img="${prod.image}">
+              <img src="${prod.image}" alt="${prod.name}" class="img-fluid">
+            </a>
+            <h2 class="item-title"><a href="#">${prod.name}</a></h2>
+            <strong class="item-price">${precioHTML}</strong>
+          </div>
+        `;
+      }).join('');
+    })
+    .catch(error => console.error('Error al cargar novedades:', error));
+});
