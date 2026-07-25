@@ -37,7 +37,7 @@ collections:
               - { label: "Precio Anterior (Tachado, opcional)", name: "old_price", widget: "string", required: false }
               - { label: "Imagen", name: "image", widget: "image" }
 
-- name: "catalogo"
+  - name: "catalogo"
     label: "Catálogo General"
     files:
       - file: "content/productos.json"
