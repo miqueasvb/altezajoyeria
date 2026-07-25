@@ -659,25 +659,21 @@ header.site-navbar .container {
 </section>
 
 <div id="seccion-joyas" class="site-section">
-    <div class="container">
-      <div class="row">
-        <div class="title-section mb-5 col-12">
-          <div style="display: flex; align-items: center;">
-            <h2 class="text-uppercase" style="margin-right: 25px; font-weight: 900; letter-spacing: 5px; font-size: 24px; color: #1a1a1a; margin-bottom: 0; white-space: nowrap;"><span style="position: relative; display: inline-block;"><span style="position: absolute; top: -32px; left: 50%; transform: translateX(-50%); color: #b3925d;"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5M19 19C19 19.55 18.55 20 18 20H6C5.45 20 5 19.55 5 19V18H19V19Z"/></svg></span>Destacados</span></h2>
-            <div style="flex-grow: 1; height: 1px; background: #ccc;"></div>
-          </div>
+  <div class="container">
+    <div class="row">
+      <div class="title-section mb-5 col-12">
+        <div style="display: flex; align-items: center;">
+          <h2 class="text-uppercase" style="margin-right: 25px; font-weight: 900; letter-spacing: 5px; font-size: 24px; color: #1a1a1a; margin-bottom: 0; white-space: nowrap;"><span style="position: relative; display: inline-block;"><span style="position: absolute; top: -32px; left: 50%; transform: translateX(-50%); color: #b3925d;"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5M19 19C19 19.55 18.55 20 18 20H6C5.45 20 5 19.55 5 19V18H19V19Z"/></svg></span>Destacados</span></h2>
+          <div style="flex-grow: 1; height: 1px; background: #ccc;"></div>
         </div>
       </div>
-      <div class="row" id="productos-destacados-container">
-        <div class="col-lg-4 col-md-6 item-entry mb-4"><a href="#" class="product-item md-height bg-gray d-block open-modal" data-name="Anillo Classic" data-price="$200.000" data-img="images/ring1.png"><img src="images/ring1.png" alt="Image" class="img-fluid"></a><h2 class="item-title"><a href="#">Anillo Classic</a></h2><strong class="item-price">$200.000</strong></div>
-        <div class="col-lg-4 col-md-6 item-entry mb-4"><a href="#" class="product-item md-height bg-gray d-block open-modal" data-name="Anillo de oro 18 quilates" data-price="$175.000" data-img="images/ring2.webp"><img src="images/ring2.webp" alt="Image" class="img-fluid"></a><h2 class="item-title"><a href="#">Anillo de oro 18 quilates</a></h2><strong class="item-price"><del>$250.000</del> $175.000</strong></div>
-        <div class="col-lg-4 col-md-6 item-entry mb-4"><a href="#" class="product-item md-height bg-gray d-block open-modal" data-name="Gargantilla Plata" data-price="$76.000" data-img="images/collar1.webp"><img src="images/collar1.webp" alt="Image" class="img-fluid"></a><h2 class="item-title"><a href="#">Collar Corazón de Plata</a></h2><strong class="item-price"><del>$90.000</del> $76.000</strong></div>
-        <div class="col-lg-4 col-md-6 item-entry mb-4"><a href="#" class="product-item md-height bg-gray d-block open-modal" data-name="Brazalete Alteza" data-price="$175.000" data-img="images/brazalete1.jpg"><img src="images/brazalete1.jpg" alt="Image" class="img-fluid"></a><h2 class="item-title"><a href="#">Brazalete Alteza</a></h2><strong class="item-price"><del>$300.000</del> $175.000</strong></div>
-        <div class="col-lg-4 col-md-6 item-entry mb-4"><a href="#" class="product-item md-height bg-gray d-block open-modal" data-name="Aros Brillantes" data-price="$175.000" data-img="images/arito1.webp"><img src="images/arito1.webp" alt="Image" class="img-fluid"></a><h2 class="item-title"><a href="#">Aros Brillantes</a></h2><strong class="item-price"><del>$300.000</del> $175.000</strong></div>
-        <div class="col-lg-4 col-md-6 item-entry mb-4"><a href="#" class="product-item md-height bg-gray d-block open-modal" data-name="Anillo Compromiso" data-price="$58.000" data-img="images/ring1.png"><img src="images/ring1.png" alt="Image" class="img-fluid"></a><h2 class="item-title"><a href="#">Anillo Compromiso</a></h2><strong class="item-price">$58.000</strong></div>
-      </div>
+    </div>
+    
+    <!-- Aquí se inyectarán las tarjetas dinámicamente -->
+    <div class="row" id="contenedor-destacados">
     </div>
   </div>
+</div>
 
   <div id="seccion-relojes" class="site-section">
     <div class="container">
@@ -872,6 +868,73 @@ header.site-navbar .container {
   }
   cargarDestacados();
 </script>
+    
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+  fetch('content/destacados.json')
+    .then(response => response.json())
+    .then(data => {
+      const contenedor = document.getElementById('contenedor-destacados');
+      contenedor.innerHTML = '';
+
+      data.productos.forEach(prod => {
+        // Armar el HTML del precio (manejando si tiene descuento o no)
+        let precioHtml = `<strong class="item-price">${prod.price}</strong>`;
+        if (prod.old_price && prod.old_price.trim() !== "") {
+          precioHtml = `<strong class="item-price"><del>${prod.old_price}</del> ${prod.price}</strong>`;
+        }
+
+        // Construir la estructura respetando tus clases y atributos para el modal
+        const tarjetaHTML = `
+          <div class="col-lg-4 col-md-6 item-entry mb-4">
+            <a href="#" class="product-item md-height bg-gray d-block open-modal" 
+               data-name="${prod.name}" 
+               data-price="${prod.price}" 
+               data-img="${prod.image}">
+              <img src="${prod.image}" alt="${prod.name}" class="img-fluid">
+            </a>
+            <h2 class="item-title"><a href="#">${prod.name}</a></h2>
+            ${precioHtml}
+          </div>
+        `;
+        contenedor.innerHTML += tarjetaHTML;
+      });
+
+      // Asegurar que el modal lea los datos dinámicos al hacer clic
+      inicializarModalDinamico();
+    })
+    .catch(error => console.error("Error al cargar los destacados:", error));
+});
+
+function inicializarModalDinamico() {
+  const triggers = document.querySelectorAll('.open-modal');
+  
+  triggers.forEach(trigger => {
+    trigger.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      // Capturamos los datos del producto clickeado
+      const nombre = this.getAttribute('data-name');
+      const precio = this.getAttribute('data-price');
+      const imagen = this.getAttribute('data-img');
+      
+      // ACÁ CONECTÁS CON LOS ELEMENTOS DE TU MODAL VISUAL
+      // (Reemplazá los selectores según cómo tengas armado el HTML de tu pop-up modal)
+      const modalTitle = document.querySelector('.modal-product-title'); // Reemplazá por tu clase/id del título en el modal
+      const modalPrice = document.querySelector('.modal-product-price'); // Reemplazá por tu clase/id del precio en el modal
+      const modalImage = document.querySelector('.modal-product-image'); // Reemplazá por tu clase/id de la img en el modal
+
+      if (modalTitle) modalTitle.textContent = nombre;
+      if (modalPrice) modalPrice.textContent = precio;
+      if (modalImage) modalImage.setAttribute('src', imagen);
+
+      // Si usás Bootstrap nativo por código, podés abrirlo así (si ya lo abre tu script original, podés omitir esto):
+      // var myModal = new bootstrap.Modal(document.getElementById('tuModalId'));
+      // myModal.show();
+    });
+  });
+}
+    </script>
     
   </div><!-- /.site-wrap -->
   </div><!-- /.site-navbar -->
