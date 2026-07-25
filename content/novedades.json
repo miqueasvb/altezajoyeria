@@ -1,0 +1,22 @@
+{
+  "productos": [
+    {
+      "name": "Reloj 1",
+      "price": "$20.000",
+      "old_price": "",
+      "image": "images/reloj1.webp"
+    },
+    {
+      "name": "Reloj 2",
+      "price": "$28.000",
+      "old_price": "$46.000",
+      "image": "images/reloj1.webp"
+    },
+    {
+      "name": "Reloj 3",
+      "price": "$28.000",
+      "old_price": "$46.000",
+      "image": "images/reloj1.webp"
+    }
+  ]
+}
