@@ -6,14 +6,28 @@ media_folder: "images"
 public_folder: "images"
 
 collections:
-  - name: "destacados_home"
-    label: "✨ Destacados del Index"
+  - name: "secciones_home"
+    label: "Página Principal (www.altezajoyeria.com.ar)"
     files:
       - name: "destacados_json"
-        label: "Lista de Productos Destacados"
+        label: "Destacados"
         file: "content/destacados.json"
         fields:
-          - label: "Productos"
+          - label: "Destacados"
+            name: "productos"
+            widget: "list"
+            summary: '{{fields.name}}'
+            fields:
+              - { label: "Título del Producto", name: "name", widget: "string" }
+              - { label: "Precio Actual", name: "price", widget: "string" }
+              - { label: "Precio Anterior (Tachado, opcional)", name: "old_price", widget: "string", required: false }
+              - { label: "Imagen", name: "image", widget: "image" }
+
+      - name: "novedades_json"
+        label: "Novedades"
+        file: "content/novedades.json"
+        fields:
+          - label: "Novedades"
             name: "productos"
             widget: "list"
             summary: '{{fields.name}}'
