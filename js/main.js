@@ -305,3 +305,51 @@ document.getElementById('filtrosClear')?.addEventListener('click', () => {
 
 // Arrancar al cargar la vista catalogo.html
 document.addEventListener('DOMContentLoaded', iniciarCatalogo);
+
+
+
+// Iconos SVG predefinidos en base al valor elegido en Decap CMS
+const ICONOS_TOPBAR = {
+  tarjeta: `<svg class="top-bar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>`,
+  descuento: `<svg class="top-bar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+  envio: `<svg class="top-bar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>`
+};
+
+async function cargarAnunciosTopBar() {
+  const container = document.getElementById('topBarAnnouncement');
+  if (!container) return;
+
+  try {
+    const res = await fetch('content/anuncios.json');
+    const data = await res.json();
+    const anuncios = data.anuncios || [];
+
+    if (anuncios.length === 0) return;
+
+    // Generar los ítems HTML desde el JSON
+    const itemsHTML = anuncios.map(item => `
+      <div class="top-bar-item">
+        ${ICONOS_TOPBAR[item.icono] || ICONOS_TOPBAR.descuento}
+        <span>${item.texto}</span>
+      </div>
+    `).join('');
+
+    // Si el cliente pone pocos anuncios, los triplicamos internamente para rellenar pantallas anchas
+    const listaExtendidaHTML = itemsHTML + itemsHTML + itemsHTML;
+
+    // Construir las 2 pistas espejo para el bucle CSS infinito
+    container.innerHTML = `
+      <div class="top-bar-track">
+        ${listaExtendidaHTML}
+      </div>
+      <div class="top-bar-track" aria-hidden="true">
+        ${listaExtendidaHTML}
+      </div>
+    `;
+  } catch (error) {
+    console.error('Error cargando los anuncios de la topbar:', error);
+  }
+}
+
+// Ejecutar al cargar la página
+document.addEventListener('DOMContentLoaded', cargarAnunciosTopBar);
