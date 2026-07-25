@@ -1,6 +1,6 @@
 collections:
   - name: "destacados_home"
-    label: "✨ Destacados del Index"
+    label: "Destacados"
     files:
       - name: "destacados_json"
         label: "Lista de Productos Destacados"
