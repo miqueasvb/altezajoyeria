@@ -328,17 +328,23 @@ async function cargarAnunciosTopBar() {
     if (anuncios.length === 0) return;
 
     // Generar los ítems HTML desde el JSON
-    const itemsHTML = anuncios.map(item => `
-      <div class="top-bar-item">
-        ${ICONOS_TOPBAR[item.icono] || ICONOS_TOPBAR.descuento}
-        <span>${item.texto}</span>
-      </div>
-    `).join('');
+    const itemsHTML = anuncios.map(item => {
+      // Verificamos si la clave existe en el objeto. Si existe (incluso si es ""), usamos ese valor.
+      // Solo si el campo viene undefined/null o con un valor no registrado, usamos el icono de descuento por defecto.
+      const iconoSVG = (item.icono in ICONOS_TOPBAR) 
+        ? ICONOS_TOPBAR[item.icono] 
+        : ICONOS_TOPBAR.descuento;
 
-    // Si el cliente pone pocos anuncios, los triplicamos internamente para rellenar pantallas anchas
+      return `
+        <div class="top-bar-item">
+          ${iconoSVG}
+          <span>${item.texto}</span>
+        </div>
+      `;
+    }).join('');
+
     const listaExtendidaHTML = itemsHTML + itemsHTML + itemsHTML;
 
-    // Construir las 2 pistas espejo para el bucle CSS infinito
     container.innerHTML = `
       <div class="top-bar-track">
         ${listaExtendidaHTML}
@@ -350,6 +356,7 @@ async function cargarAnunciosTopBar() {
   } catch (error) {
     console.error('Error cargando los anuncios de la topbar:', error);
   }
+}
 }
 
 // Ejecutar al cargar la página
