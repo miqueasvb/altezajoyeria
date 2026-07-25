@@ -2,13 +2,12 @@
   "productos": [
     {
       "id": "prod-1",
-      "material": "",
-      "tipo": "relojes",
-      "marca": "citizen",
-      "genero": "caballero",
-      "precio": 40000,
-      "nombre": "Reloj Citizen PANEL",
-      "imagen": "images/cadena.jpg"
+      "nombre": "Cadena Plata admin",
+      "precio": 12500,
+      "imagen": "images/collar1.webp",
+      "material": "plata",
+      "tipo": "cadenas",
+      "genero": "dama"
     }
   ]
 }
