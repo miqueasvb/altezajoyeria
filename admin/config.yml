@@ -132,10 +132,9 @@ collections:
                   - { label: "Calvin Klein", value: "calvin-klein" }
                   - { label: "Knock Out", value: "knock-out" }
 
-  - name: "soporte"
+ - name: "soporte"
     label: "💬 Soporte y Ayuda"
-    description: "Hola 👋, soy Miqueas Vico, dueño de Rubit Studios, emprendimiento de diseño y desarrollo web. Te comento un poco acerca del panel administrativo: Los cambios que realices en el panel se actualizarán en la página entre los siguientes 30 - 60 segundos, cualquier problema o duda que tengas, no dudes en mandar mensale al 3644247775."
-    files:
+    description: "👋 ¡Hola! Soy Miqueas Vico, fundador de Rubit Studios (Instagram: @rubit.studios) — ⏱️ TIEMPO DE CAMBIOS: Una vez publicado, los cambios tardan entre 30 y 60 segundos en verse en la web. — 📲 SOPORTE: Ante cualquier duda o problema, escribime por WhatsApp al +54 9 364 424-7775."
       - name: "info_soporte"
         label: " "
         file: "content/soporte.json"
