@@ -1349,9 +1349,9 @@ a {
   justify-content: space-around;
   flex-shrink: 0;
   min-width: 100%;
-  gap: 4rem; /* 👈 Espaciado amplio y elegante entre mensajes */
-  padding-right: 4rem;
-  animation: marqueeHorizontal 25s linear infinite; /* Ajustá los segundos si querés más rápido/lento */
+  gap: 2rem; /* 👈 Espaciado más corto y continuo */
+  padding-right: 2rem; /* 👈 Mismo valor para evitar saltos al reiniciar el bucle */
+  animation: marqueeHorizontal 22s linear infinite; /* Un toque más ágil al estar más juntos */
 }
 
 /* Pausa suave al pasar el cursor */
