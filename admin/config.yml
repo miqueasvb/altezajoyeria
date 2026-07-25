@@ -1,24 +1,17 @@
-backend:
-  name: git-gateway
-  branch: main
-
-media_folder: "images"
-public_folder: "images"
-
 collections:
   - name: "destacados_home"
     label: "✨ Destacados del Index"
     files:
-      - name: "alteza_datos"
+      - name: "destacados_json"
         label: "Lista de Productos Destacados"
-        file: "_data/alteza_destacados.yml"
+        file: "content/destacados.json"
         fields:
-          - label: "Productos Destacados"
-            name: "productos_destacados_list"
+          - label: "Productos"
+            name: "productos"
             widget: "list"
-            summary: '{{fields.titulo}}'
+            summary: '{{fields.name}}'
             fields:
-              - { label: "Título del Producto", name: "titulo", widget: "string" }
-              - { label: "Precio Actual", name: "precio", widget: "string" }
-              - { label: "Precio Anterior (Tachado, opcional)", name: "precio_anterior", widget: "string", required: false }
-              - { label: "Imagen", name: "imagen", widget: "image" }
+              - { label: "Título del Producto", name: "name", widget: "string" }
+              - { label: "Precio Actual", name: "price", widget: "string" }
+              - { label: "Precio Anterior (Tachado, opcional)", name: "old_price", widget: "string", required: false }
+              - { label: "Imagen", name: "image", widget: "image" }
