@@ -1,10 +1,16 @@
 collections:
-  - name: "destacados"
-    label: "Productos Destacados (Index)"
-    folder: "content/destacados" # O la ruta donde guardes tus archivos de contenido
-    create: true
-    fields:
-      - {label: "Nombre del Producto", name: "title", widget: "string"}
-      - {label: "Precio Actual", name: "price", widget: "string"}
-      - {label: "Precio Anterior (Opcional)", name: "old_price", widget: "string", required: false}
-      - {label: "Imagen", name: "image", widget: "image"}
+  - name: "home"
+    label: "Página de Inicio"
+    files:
+      - file: "content/destacados.json"
+        label: "Sección Destacados (Index)"
+        name: "destacados"
+        fields:
+          - label: "Lista de Productos Destacados"
+            name: "productos"
+            widget: "list"
+            fields:
+              - {label: "Nombre del Producto", name: "name", widget: "string"}
+              - {label: "Precio Actual", name: "price", widget: "string"}
+              - {label: "Precio Anterior (Opcional, tachado)", name: "old_price", widget: "string", required: false}
+              - {label: "Imagen del Producto", name: "image", widget: "image"}
