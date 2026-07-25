@@ -146,34 +146,47 @@ async function iniciarCatalogo() {
   }
 }
 
-// 2. Mapear dinámicamente las cantidades (ej: Plata 925 -> Anillos (2))
+// 2. Mapear dinámicamente las cantidades y encender/apagar casillas (.is-zero)
 function actualizarContadoresSidebar() {
+  // Helper para poner el texto y encender/apagar la casilla
+  const actualizarEstadoFiltro = (el, cantidad) => {
+    el.textContent = cantidad > 0 ? `(${cantidad})` : '(0)';
+    const labelPadre = el.closest('.filtro-check') || el.closest('label');
+    if (labelPadre) {
+      if (cantidad === 0) {
+        labelPadre.classList.add('is-zero');
+      } else {
+        labelPadre.classList.remove('is-zero');
+      }
+    }
+  };
+
   // Combos Material|Tipo (data-count-combo="plata|anillos")
   document.querySelectorAll('[data-count-combo]').forEach(el => {
     const [mat, tipo] = el.getAttribute('data-count-combo').split('|');
     const cant = PRODUCTOS.filter(p => p.material === mat && p.tipo === tipo).length;
-    el.textContent = cant > 0 ? `(${cant})` : '(0)';
+    actualizarEstadoFiltro(el, cant);
   });
 
   // Género (data-count-genero="dama")
   document.querySelectorAll('[data-count-genero]').forEach(el => {
     const gen = el.getAttribute('data-count-genero');
     const cant = PRODUCTOS.filter(p => p.genero === gen).length;
-    el.textContent = cant > 0 ? `(${cant})` : '(0)';
+    actualizarEstadoFiltro(el, cant);
   });
 
   // Detalle (data-count-sub="con-piedras")
   document.querySelectorAll('[data-count-sub]').forEach(el => {
     const sub = el.getAttribute('data-count-sub');
     const cant = PRODUCTOS.filter(p => p.sub === sub).length;
-    el.textContent = cant > 0 ? `(${cant})` : '(0)';
+    actualizarEstadoFiltro(el, cant);
   });
 
   // Marcas de relojes (data-count-marca="citizen")
   document.querySelectorAll('[data-count-marca]').forEach(el => {
     const marca = el.getAttribute('data-count-marca');
     const cant = PRODUCTOS.filter(p => p.marca === marca).length;
-    el.textContent = cant > 0 ? `(${cant})` : '(0)';
+    actualizarEstadoFiltro(el, cant);
   });
 }
 
