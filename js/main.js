@@ -85,17 +85,13 @@ jQuery(document).ready(function($) {
     };
     searchShow();
 
-
-});
-
+}); // 👈 ACÁ FALTABA EL CIERRE DE JQUERY
 
 
-
-
-
-
+// ==========================================
+// NOVEDADES (HOME)
+// ==========================================
 document.addEventListener("DOMContentLoaded", () => {
-  // Cargar Novedades desde el JSON de Decap CMS
   fetch('/content/novedades.json')
     .then(response => response.json())
     .then(data => {
@@ -103,7 +99,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!contenedor) return;
 
       contenedor.innerHTML = data.productos.map(prod => {
-        // Si tiene precio anterior, lo muestra tachado
         const precioHTML = prod.old_price && prod.old_price.trim() !== "" 
           ? `<del>${prod.old_price}</del> ${prod.price}`
           : `${prod.price}`;
@@ -126,19 +121,20 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-
+// ==========================================
+// CATÁLOGO GENERAL
+// ==========================================
 let PRODUCTOS = [];
 
-// 1. Cargar el JSON generado por Decap CMS
 async function iniciarCatalogo() {
+  const grid = document.getElementById('productosGrid');
+  if (!grid) return; // Si no estamos en catalogo.html, no ejecuta nada
+
   try {
     const res = await fetch('content/productos.json');
     const data = await res.json();
-    
-    // Extraemos la lista 'productos' del JSON que genera el CMS
     PRODUCTOS = data.productos || [];
     
-    // Al recibir los datos, calculamos los contadores del sidebar y renderizamos
     actualizarContadoresSidebar();
     filtrarYRenderizar();
   } catch (err) {
@@ -146,9 +142,7 @@ async function iniciarCatalogo() {
   }
 }
 
-// 2. Mapear dinámicamente las cantidades y encender/apagar casillas (.is-zero)
 function actualizarContadoresSidebar() {
-  // Helper para poner el texto y encender/apagar la casilla
   const actualizarEstadoFiltro = (el, cantidad) => {
     el.textContent = cantidad > 0 ? `(${cantidad})` : '(0)';
     const labelPadre = el.closest('.filtro-check') || el.closest('label');
@@ -161,28 +155,24 @@ function actualizarContadoresSidebar() {
     }
   };
 
-  // Combos Material|Tipo (data-count-combo="plata|anillos")
   document.querySelectorAll('[data-count-combo]').forEach(el => {
     const [mat, tipo] = el.getAttribute('data-count-combo').split('|');
     const cant = PRODUCTOS.filter(p => p.material === mat && p.tipo === tipo).length;
     actualizarEstadoFiltro(el, cant);
   });
 
-  // Género (data-count-genero="dama")
   document.querySelectorAll('[data-count-genero]').forEach(el => {
     const gen = el.getAttribute('data-count-genero');
     const cant = PRODUCTOS.filter(p => p.genero === gen).length;
     actualizarEstadoFiltro(el, cant);
   });
 
-  // Detalle (data-count-sub="con-piedras")
   document.querySelectorAll('[data-count-sub]').forEach(el => {
     const sub = el.getAttribute('data-count-sub');
     const cant = PRODUCTOS.filter(p => p.sub === sub).length;
     actualizarEstadoFiltro(el, cant);
   });
 
-  // Marcas de relojes (data-count-marca="citizen")
   document.querySelectorAll('[data-count-marca]').forEach(el => {
     const marca = el.getAttribute('data-count-marca');
     const cant = PRODUCTOS.filter(p => p.marca === marca).length;
@@ -190,13 +180,11 @@ function actualizarContadoresSidebar() {
   });
 }
 
-// Función auxiliar para formatear los precios estilo AR
 function formatPrice(n) {
   if (!n && n !== 0) return '';
   return '$' + Number(n).toLocaleString('es-AR');
 }
 
-// 3. Filtrar y Renderizar en #productosGrid
 function filtrarYRenderizar() {
   const combos = Array.from(document.querySelectorAll('input[data-group="combo"]:checked')).map(i => i.value);
   const generos = Array.from(document.querySelectorAll('input[data-group="genero"]:checked')).map(i => i.value);
@@ -208,36 +196,27 @@ function filtrarYRenderizar() {
   const orden = document.getElementById('ordenSelect')?.value || 'destacado';
 
   let filtrados = PRODUCTOS.filter(p => {
-    // Filtro por combos (ej: "plata|anillos")
     if (combos.length > 0) {
       const miCombo = `${p.material}|${p.tipo}`;
       if (!combos.includes(miCombo)) return false;
     }
-
-    // Filtro Género
     if (generos.length > 0 && !generos.includes(p.genero)) return false;
-
-    // Filtro Subcategoría
     if (subs.length > 0 && !subs.includes(p.sub)) return false;
-
-    // Filtro Marca
     if (marcas.length > 0 && !marcas.includes(p.marca)) return false;
-
-    // Rango de precio
     if (p.precio < desde || p.precio > hasta) return false;
 
     return true;
   });
 
-  // Ordenamiento
   if (orden === 'precio-asc') filtrados.sort((a, b) => a.precio - b.precio);
   if (orden === 'precio-desc') filtrados.sort((a, b) => b.precio - a.precio);
   if (orden === 'nombre-asc') filtrados.sort((a, b) => a.nombre.localeCompare(b.nombre));
 
-  // Render HTML
   const grid = document.getElementById('productosGrid');
   const countEl = document.getElementById('resultCount');
   const emptyEl = document.getElementById('catalogoEmpty');
+
+  if (!grid) return;
 
   if (countEl) countEl.textContent = filtrados.length;
 
@@ -248,25 +227,21 @@ function filtrarYRenderizar() {
     if (emptyEl) emptyEl.style.display = 'none';
 
     grid.innerHTML = filtrados.map(p => {
-      // 1. Armar HTML para precio anterior / oferta
       const tieneDescuento = p.old_price && parseFloat(p.old_price) > p.precio;
       const precioHtml = tieneDescuento
         ? `<span class="anterior">${formatPrice(p.old_price)}</span><span class="actual">${formatPrice(p.precio)}</span>`
         : `<span class="actual">${formatPrice(p.precio)}</span>`;
 
-      // 2. Etiqueta % OFF
       const offHtml = tieneDescuento
         ? `<span class="producto-off">${Math.round((1 - p.precio / parseFloat(p.old_price)) * 100)}% OFF</span>`
         : '';
 
-      // 3. Etiqueta de material / marca
       let matLabelText = p.material_label || p.material || '';
       if (!matLabelText && p.marca) matLabelText = 'Relojería';
       const matLabelHtml = matLabelText 
         ? `<span class="producto-material">${matLabelText}</span>` 
         : '';
 
-      // 4. Retornar la tarjeta exacta que tenías en catalogo.html
       return `
         <div class="col-6 col-md-6 col-lg-4 mb-4">
           <a href="#" class="producto-card open-modal" 
@@ -288,7 +263,6 @@ function filtrarYRenderizar() {
   }
 }
 
-// Eventos de interactividad con los filtros
 document.addEventListener('change', e => {
   if (e.target.matches('input[type="checkbox"], #ordenSelect')) {
     filtrarYRenderizar();
@@ -303,13 +277,14 @@ document.getElementById('filtrosClear')?.addEventListener('click', () => {
   filtrarYRenderizar();
 });
 
-// Arrancar al cargar la vista catalogo.html
 document.addEventListener('DOMContentLoaded', iniciarCatalogo);
 
 
-
+// ==========================================
+// MARQUESINA / MARQUEE TOPBAR DINÁMICA
+// ==========================================
 const ICONOS_TOPBAR = {
-  "": "", // 👈 Si selecciona la opción vacía o no elige nada
+  "": "",
   ninguno: "",
   tarjeta: `<svg class="top-bar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>`,
   descuento: `<svg class="top-bar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
@@ -327,10 +302,7 @@ async function cargarAnunciosTopBar() {
 
     if (anuncios.length === 0) return;
 
-    // Generar los ítems HTML desde el JSON
     const itemsHTML = anuncios.map(item => {
-      // Verificamos si la clave existe en el objeto. Si existe (incluso si es ""), usamos ese valor.
-      // Solo si el campo viene undefined/null o con un valor no registrado, usamos el icono de descuento por defecto.
       const iconoSVG = (item.icono in ICONOS_TOPBAR) 
         ? ICONOS_TOPBAR[item.icono] 
         : ICONOS_TOPBAR.descuento;
@@ -357,7 +329,5 @@ async function cargarAnunciosTopBar() {
     console.error('Error cargando los anuncios de la topbar:', error);
   }
 }
-}
 
-// Ejecutar al cargar la página
 document.addEventListener('DOMContentLoaded', cargarAnunciosTopBar);
