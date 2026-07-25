@@ -133,7 +133,10 @@ let PRODUCTOS = [];
 async function iniciarCatalogo() {
   try {
     const res = await fetch('content/productos.json');
-    PRODUCTOS = await res.json();
+    const data = await res.json();
+    
+    // Extraemos la lista 'productos' del JSON que genera el CMS
+    PRODUCTOS = data.productos || [];
     
     // Al recibir los datos, calculamos los contadores del sidebar y renderizamos
     actualizarContadoresSidebar();
