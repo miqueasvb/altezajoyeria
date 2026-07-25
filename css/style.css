@@ -1350,7 +1350,7 @@ a {
   min-width: 100%;
   gap: 1.5rem; /* 👈 Este es el ÚNICO espacio real entre textos */
   padding-right: 1.5rem; /* Mismo valor que el gap */
-  animation: marqueeHorizontal 20s linear infinite;
+  animation: marqueeHorizontal 60s linear infinite;
 }
 
 /* Punto separador entre mensajes */
