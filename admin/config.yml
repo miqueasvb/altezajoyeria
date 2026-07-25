@@ -137,7 +137,6 @@ collections:
     description: "👋 ¡Hola! Soy Miqueas Vico, fundador de Rubit Studios — ⏱️ TIEMPO DE CAMBIOS: Una vez publicado, los cambios tardan entre 30 y 60 segundos en verse en la web. — 📲 SOPORTE: Ante cualquier duda o problema, escribime por WhatsApp al +54 9 364 424-7775."
     files:
       - name: "info_soporte"
-        label: "Información de Contacto"
         file: "content/soporte.json"
         fields:
           - { label: "Nota de desarrollo", name: "nota", widget: "hidden", default: "Sección informativa" }
