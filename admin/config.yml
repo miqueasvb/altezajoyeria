@@ -110,3 +110,22 @@ collections:
                   - { label: "Lacoste", value: "lacoste" }
                   - { label: "Calvin Klein", value: "calvin-klein" }
                   - { label: "Knock Out", value: "knock-out" }
+
+
+   - name: "anuncios_topbar"
+        label: "Barra Superior de Anuncios (Marquesina)"
+        file: "content/anuncios.json"
+        fields:
+          - label: "Mensajes de la Marquesina"
+            name: "anuncios"
+            widget: "list"
+            summary: '{{fields.texto}}'
+            fields:
+              - { label: "Texto del Mensaje", name: "texto", widget: "string" }
+              - label: "Icono"
+                name: "icono"
+                widget: "select"
+                options:
+                  - { label: "Tarjeta de Crédito", value: "tarjeta" }
+                  - { label: "Descuento / Joya", value: "descuento" }
+                  - { label: "Envío / Camión", value: "envio" }
