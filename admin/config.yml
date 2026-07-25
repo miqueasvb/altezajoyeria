@@ -1,3 +1,11 @@
+backend:
+  name: github
+  repo: tu-usuario/tu-repositorio
+  branch: main
+
+media_folder: "images"
+public_folder: "images"
+
 collections:
   - name: "home"
     label: "Página de Inicio"
