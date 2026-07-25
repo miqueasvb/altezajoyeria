@@ -1,0 +1,7 @@
+{
+  "anuncios": [
+    { "texto": "3 CUOTAS SIN INTERÉS EN TODAS LAS TARJETAS", "icono": "tarjeta" },
+    { "texto": "15% OFF EN EFECTIVO O TRANSFERENCIA", "icono": "descuento" },
+    { "texto": "ENVÍOS SIN CARGO EN SÁENZ PEÑA", "icono": "envio" }
+  ]
+}
