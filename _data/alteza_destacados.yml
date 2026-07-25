@@ -1,25 +1,25 @@
 productos_destacados_list:
-  - titulo: "Anillo Classic"
-    precio: "$200.000"
+  - titulo: Anillo Sample
+    precio: $180.000
     precio_anterior: ""
-    imagen: "images/ring1.png"
-  - titulo: "Anillo de oro 18 quilates"
-    precio: "$175.000"
-    precio_anterior: "$250.000"
-    imagen: "images/ring2.webp"
-  - titulo: "Collar Corazón de Plata"
-    precio: "$76.000"
-    precio_anterior: "$90.000"
-    imagen: "images/collar1.webp"
-  - titulo: "Brazalete Alteza"
-    precio: "$175.000"
-    precio_anterior: "$300.000"
-    imagen: "images/brazalete1.jpg"
-  - titulo: "Aros Brillantes"
-    precio: "$175.000"
-    precio_anterior: "$300.000"
-    imagen: "images/arito1.webp"
-  - titulo: "Anillo Compromiso"
-    precio: "$58.000"
+    imagen: images/ring1.png
+  - titulo: Anillo de oro 18 quilates
+    precio: $175.000
+    precio_anterior: $250.000
+    imagen: images/ring2.webp
+  - titulo: Collar Corazón de Plata
+    precio: $76.000
+    precio_anterior: $90.000
+    imagen: images/collar1.webp
+  - titulo: Brazalete Alteza
+    precio: $175.000
+    precio_anterior: $300.000
+    imagen: images/brazalete1.jpg
+  - titulo: Aros Brillantes
+    precio: $175.000
+    precio_anterior: $300.000
+    imagen: images/arito1.webp
+  - titulo: Anillo Compromiso
+    precio: $58.000
     precio_anterior: ""
-    imagen: "images/ring1.png"
+    imagen: images/ring1.png
