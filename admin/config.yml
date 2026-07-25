@@ -9,7 +9,7 @@ collections:
   - name: "secciones_home"
     label: "Página Principal (www.altezajoyeria.com.ar)"
     files:
-      - name: "anuncios_topbar"
+- name: "anuncios_topbar"
         label: "Barra Superior de Anuncios (Marquesina)"
         file: "content/anuncios.json"
         fields:
@@ -22,7 +22,9 @@ collections:
               - label: "Icono"
                 name: "icono"
                 widget: "select"
+                default: "ninguno"
                 options:
+                  - { label: "Sin Icono", value: "ninguno" }
                   - { label: "Tarjeta de Crédito", value: "tarjeta" }
                   - { label: "Descuento / Joya", value: "descuento" }
                   - { label: "Envío / Camión", value: "envio" }
