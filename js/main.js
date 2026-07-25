@@ -177,6 +177,12 @@ function actualizarContadoresSidebar() {
   });
 }
 
+// Función auxiliar para formatear los precios estilo AR
+function formatPrice(n) {
+  if (!n && n !== 0) return '';
+  return '$' + Number(n).toLocaleString('es-AR');
+}
+
 // 3. Filtrar y Renderizar en #productosGrid
 function filtrarYRenderizar() {
   const combos = Array.from(document.querySelectorAll('input[data-group="combo"]:checked')).map(i => i.value);
@@ -227,17 +233,45 @@ function filtrarYRenderizar() {
     if (emptyEl) emptyEl.style.display = 'block';
   } else {
     if (emptyEl) emptyEl.style.display = 'none';
-    grid.innerHTML = filtrados.map(p => `
-      <div class="col-6 col-md-4 mb-4">
-        <div class="card-producto">
-          <div class="img-wrap">
-            <img src="${p.imagen}" alt="${p.nombre}" class="img-fluid">
-          </div>
-          <h3>${p.nombre}</h3>
-          <p class="precio">$${p.precio.toLocaleString('es-AR')}</p>
+
+    grid.innerHTML = filtrados.map(p => {
+      // 1. Armar HTML para precio anterior / oferta
+      const tieneDescuento = p.old_price && parseFloat(p.old_price) > p.precio;
+      const precioHtml = tieneDescuento
+        ? `<span class="anterior">${formatPrice(p.old_price)}</span><span class="actual">${formatPrice(p.precio)}</span>`
+        : `<span class="actual">${formatPrice(p.precio)}</span>`;
+
+      // 2. Etiqueta % OFF
+      const offHtml = tieneDescuento
+        ? `<span class="producto-off">${Math.round((1 - p.precio / parseFloat(p.old_price)) * 100)}% OFF</span>`
+        : '';
+
+      // 3. Etiqueta de material / marca
+      let matLabelText = p.material_label || p.material || '';
+      if (!matLabelText && p.marca) matLabelText = 'Relojería';
+      const matLabelHtml = matLabelText 
+        ? `<span class="producto-material">${matLabelText}</span>` 
+        : '';
+
+      // 4. Retornar la tarjeta exacta que tenías en catalogo.html
+      return `
+        <div class="col-6 col-md-6 col-lg-4 mb-4">
+          <a href="#" class="producto-card open-modal" 
+             data-name="${p.nombre}" 
+             data-price="${formatPrice(p.precio)}" 
+             data-img="${p.imagen}">
+            <div class="producto-imgwrap">
+              ${offHtml}
+              <img src="${p.imagen}" alt="${p.nombre}">
+            </div>
+            ${matLabelHtml}
+            <div class="producto-nombre">${p.nombre}</div>
+            <div class="producto-precio">${precioHtml}</div>
+            <span class="producto-consultar">Consultar →</span>
+          </a>
         </div>
-      </div>
-    `).join('');
+      `;
+    }).join('');
   }
 }
 
@@ -251,8 +285,8 @@ document.addEventListener('change', e => {
 document.getElementById('aplicarPrecio')?.addEventListener('click', filtrarYRenderizar);
 document.getElementById('filtrosClear')?.addEventListener('click', () => {
   document.querySelectorAll('.filtros-sidebar input[type="checkbox"]').forEach(c => c.checked = false);
-  document.getElementById('precioDesde').value = '';
-  document.getElementById('precioHasta').value = '';
+  if (document.getElementById('precioDesde')) document.getElementById('precioDesde').value = '';
+  if (document.getElementById('precioHasta')) document.getElementById('precioHasta').value = '';
   filtrarYRenderizar();
 });
 
