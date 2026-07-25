@@ -36,3 +36,71 @@ collections:
               - { label: "Precio Actual", name: "price", widget: "string" }
               - { label: "Precio Anterior (Tachado, opcional)", name: "old_price", widget: "string", required: false }
               - { label: "Imagen", name: "image", widget: "image" }
+
+- name: "catalogo"
+    label: "Catálogo de Productos"
+    files:
+      - file: "content/productos.json"
+        label: "Lista de Productos"
+        name: "productos"
+        fields:
+          - name: "productos"
+            label: "Productos"
+            widget: "list"
+            summary: '{{fields.nombre}} - {{fields.material}} - {{fields.tipo}}'
+            fields:
+              - { label: "ID Único", name: "id", widget: "string", default: "prod-1" }
+              - { label: "Nombre del Producto", name: "nombre", widget: "string" }
+              - { label: "Precio ($)", name: "precio", widget: "number", value_type: "int" }
+              - { label: "Imagen", name: "imagen", widget: "image" }
+              - label: "Material"
+                name: "material"
+                widget: "select"
+                required: false
+                options:
+                  - { label: "Plata 925", value: "plata" }
+                  - { label: "Oro 18k", value: "oro" }
+                  - { label: "Plata y Oro", value: "plata-oro" }
+                  - { label: "Ninguno (Para Relojes)", value: "" }
+              - label: "Tipo de Producto"
+                name: "tipo"
+                widget: "select"
+                options:
+                  - { label: "Anillos", value: "anillos" }
+                  - { label: "Aros", value: "aros" }
+                  - { label: "Cadenas", value: "cadenas" }
+                  - { label: "Pulseras", value: "pulseras" }
+                  - { label: "Dijes y Colgantes", value: "dijes" }
+                  - { label: "Cintillos", value: "cintillos" }
+                  - { label: "Alianzas", value: "alianzas" }
+                  - { label: "Relojería", value: "relojes" }
+              - label: "Género"
+                name: "genero"
+                widget: "select"
+                required: false
+                options:
+                  - { label: "Dama", value: "dama" }
+                  - { label: "Caballero", value: "caballero" }
+              - label: "Detalle / Subcategoría",
+                name: "sub",
+                widget: "select",
+                required: false,
+                options:
+                  - { label: "Con piedras", value: "con-piedras" },
+                  - { label: "Sin piedras", value: "sin-piedras" },
+                  - { label: "Abridores", value: "abridores" },
+                  - { label: "Argollas", value: "argollas" },
+                  - { label: "Esclavas", value: "esclavas" },
+                  - { label: "Cierre rosca", value: "cierre-rosca" }
+              - label: "Marca (Solo Relojes)",
+                name: "marca",
+                widget: "select",
+                required: false,
+                options:
+                  - { label: "Citizen", value: "citizen" },
+                  - { label: "Casio", value: "casio" },
+                  - { label: "Festina", value: "festina" },
+                  - { label: "Swatch", value: "swatch" },
+                  - { label: "Tissot", value: "tissot" },
+                  - { label: "Seiko", value: "seiko" }
+              - { label: "Destacado en Inicio", name: "destacado", widget: "boolean", default: false }
