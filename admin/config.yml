@@ -131,3 +131,17 @@ collections:
                   - { label: "Lacoste", value: "lacoste" }
                   - { label: "Calvin Klein", value: "calvin-klein" }
                   - { label: "Knock Out", value: "knock-out" }
+
+
+                  - name: "soporte"
+    label: "💬 Soporte y Ayuda"
+    description: "Instrucciones de uso del panel y contacto directo de asistencia."
+    files:
+      - name: "guia_usuario"
+        label: "Manual de Uso y Contacto"
+        file: "content/soporte.json"
+        fields:
+          - { label: "Título", name: "titulo", widget: "string" }
+          - { label: "Mensaje de Bienvenida", name: "mensaje_bienvenida", widget: "text" }
+          - { label: "Guía / Instrucciones", name: "instrucciones", widget: "markdown" }
+          - { label: "Contacto de Desarrollo", name: "whatsapp", widget: "string" }
