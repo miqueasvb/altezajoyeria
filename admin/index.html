@@ -4,11 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Panel de Administración - Alteza Joyería</title>
-  <!-- Widget de Netlify Identity para el login con email y contraseña -->
+  <!-- Netlify Identity Widget para el login por email/contraseña -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
-  <!-- Script oficial actualizado de Static CMS -->
-  <script src="https://cdn.jsdelivr.net/npm/@staticcms/core@^3/dist/static-cms.js"></script>
+  <!-- Usamos el script estable de Static CMS que incluye el bundle completo -->
+  <script src="https://unpkg.com/@staticcms/app@^3/dist/static-cms-app.js"></script>
+  <script>
+    CMS.init();
+  </script>
 </body>
 </html>
