@@ -20,10 +20,10 @@
         }
       });
 
-      // Detectar si venimos de un link de invitación o recuperación
-      if (window.location.hash.includes('invite_token') || window.location.hash.includes('recovery_token')) {
+      // Si hay un token de invitación en la URL, abrimos directamente en modo de registro/configuración
+      if (window.location.hash && window.location.hash.includes('invite_token')) {
         window.netlifyIdentity.on('init', () => {
-          window.netlifyIdentity.open();
+          window.netlifyIdentity.open('signup');
         });
       }
     }
