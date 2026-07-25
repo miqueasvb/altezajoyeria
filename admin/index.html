@@ -4,14 +4,25 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Panel de Administración - Alteza Joyería</title>
-  <!-- Netlify Identity Widget para el login por email/contraseña -->
+  <!-- Widget de Netlify Identity -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
-  <!-- Usamos el script estable de Static CMS que incluye el bundle completo -->
+  <!-- Script de Static CMS -->
   <script src="https://unpkg.com/@staticcms/app@^3/dist/static-cms-app.js"></script>
   <script>
     CMS.init();
+    
+    // Esto asegura que si alguien entra con un link de invitación, se abra el modal de login/password
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.reload();
+          });
+        }
+      });
+    }
   </script>
 </body>
 </html>
