@@ -15,22 +15,19 @@ async function optimizeImages() {
     const filePath = path.join(imagesDir, file);
     const ext = path.extname(file).toLowerCase();
 
-    // Solo procesamos JPG, JPEG y PNG
-    if (['.jpg', '.jpeg', '.png'].includes(ext)) {
+    if (['.jpg', '.jpeg', '.png', '.webp'].includes(ext)) {
       try {
         const tempPath = path.join(imagesDir, 'temp_' + file);
 
-        // --- VERSIÓN CORREGIDA: SIN NINGUNA INSTRUCCIÓN DE ROTACIÓN ---
         await sharp(filePath, { failOnError: false })
-          // SOLO redimensionamos y comprimimos, respetando la orientación física original
+          .rotate() // Lee los datos del celular y gira los píxeles físicamente para dejarla derecha
           .resize({ width: 1200, withoutEnlargement: true })
           .jpeg({ quality: 80, force: false })
           .png({ compressionLevel: 8, force: false })
           .toFile(tempPath);
-        // -------------------------------------------------------------
 
         fs.renameSync(tempPath, filePath);
-        console.log(`✅ Imagen optimizada (preservando píxeles nativos): ${file}`);
+        console.log(`✅ Imagen corregida y optimizada: ${file}`);
       } catch (err) {
         console.error(`❌ Error procesando ${file}:`, err);
       }
