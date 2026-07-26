@@ -8,6 +8,15 @@
       "tipo": "relojes",
       "genero": "caballero",
       "marca": "tissot"
+    },
+    {
+      "nombre": "Reloj Tissot 2",
+      "precio": 1000,
+      "imagen": "images/reloj-tissot-2.jpg",
+      "material": "",
+      "tipo": "relojes",
+      "genero": "caballero",
+      "marca": "tissot"
     }
   ]
 }
