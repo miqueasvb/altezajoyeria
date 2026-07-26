@@ -1,13 +1,3 @@
 {
-  "productos": [
-    {
-      "nombre": "Reloj Tissot 1",
-      "precio": 1000,
-      "imagen": "images/reloj-tissot-1.jpg",
-      "material": "",
-      "tipo": "relojes",
-      "genero": "caballero",
-      "marca": "tissot"
-    }
-  ]
+  "productos": []
 }
