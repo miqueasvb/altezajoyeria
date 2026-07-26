@@ -8,14 +8,6 @@
       "tipo": "relojes",
       "genero": "caballero",
       "marca": "tissot"
-    },
-    {
-      "nombre": "Anillo plata",
-      "precio": 18000,
-      "imagen": "images/20230501_221338.jpg",
-      "material": "plata",
-      "tipo": "anillos",
-      "genero": "dama"
     }
   ]
 }
