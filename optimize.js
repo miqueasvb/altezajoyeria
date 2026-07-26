@@ -10,7 +10,6 @@ async function optimizeImages() {
   const files = fs.readdirSync(imagesDir);
 
   for (const file of files) {
-    // Ignoramos archivos temporales si existieran
     if (file.startsWith('temp_')) continue;
 
     const filePath = path.join(imagesDir, file);
@@ -20,15 +19,16 @@ async function optimizeImages() {
       try {
         const tempPath = path.join(imagesDir, 'temp_' + file);
 
-        await sharp(filePath)
+        // Procesa la imagen respetando exactamente su orientación nativa
+        await sharp(filePath, { failOnError: false })
+          .rotate(0) // Mantiene el ángulo original sin intentar adivinar rotaciones EXIF
           .resize({ width: 1200, withoutEnlargement: true })
           .jpeg({ quality: 80, force: false })
           .png({ compressionLevel: 8, force: false })
           .toFile(tempPath);
 
-        // Sobrescribimos la imagen original con la versión liviana
         fs.renameSync(tempPath, filePath);
-        console.log(`✅ Imagen optimizada: ${file}`);
+        console.log(`✅ Imagen optimizada (respetando orientación): ${file}`);
       } catch (err) {
         console.error(`❌ Error procesando ${file}:`, err);
       }
