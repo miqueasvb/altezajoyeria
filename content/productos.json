@@ -1,3 +1,13 @@
 {
-  "productos": []
+  "productos": [
+    {
+      "nombre": "Reloj Tissot 8",
+      "precio": 8888,
+      "imagen": "images/reloj-tissot-8.jpg",
+      "material": "",
+      "tipo": "relojes",
+      "genero": "caballero",
+      "marca": "tissot"
+    }
+  ]
 }
