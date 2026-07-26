@@ -17,6 +17,33 @@
       "tipo": "relojes",
       "genero": "caballero",
       "marca": "tissot"
+    },
+    {
+      "nombre": "Reloj Tissot 3",
+      "precio": 1000,
+      "imagen": "images/reloj-tissot-3.jpg",
+      "material": "",
+      "tipo": "relojes",
+      "genero": "caballero",
+      "marca": "tissot"
+    },
+    {
+      "nombre": "Reloj Tissot 4",
+      "precio": 1000,
+      "imagen": "images/reloj-tissot-4.jpg",
+      "material": "",
+      "tipo": "relojes",
+      "genero": "caballero",
+      "marca": "tissot"
+    },
+    {
+      "nombre": "Reloj Tissot 5",
+      "precio": 1000,
+      "imagen": "images/reloj-tissot-5.jpg",
+      "material": "",
+      "tipo": "relojes",
+      "genero": "caballero",
+      "marca": "tissot"
     }
   ]
 }
