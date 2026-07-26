@@ -1,13 +1,3 @@
 {
-  "productos": [
-    {
-      "id": "prod-1",
-      "nombre": "Cadena Plata admin",
-      "precio": 12500,
-      "imagen": "images/collar1.webp",
-      "material": "plata",
-      "tipo": "cadenas",
-      "genero": "dama"
-    }
-  ]
+  "productos": []
 }
