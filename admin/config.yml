@@ -7,10 +7,10 @@ public_folder: "images"
 
 collections:
   - name: "secciones_home"
-    label: "Página Principal (www.altezajoyeria.com.ar)"
+    label: "Página Principal"
     files:
       - name: "anuncios_topbar"
-        label: "Barra Superior de Anuncios (Marquesina)"
+        label: "Barra Superior de Anuncios (En movimiento)"
         file: "content/anuncios.json"
         fields:
           - label: "Mensajes de la Marquesina"
