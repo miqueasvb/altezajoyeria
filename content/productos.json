@@ -26,6 +26,15 @@
       "tipo": "relojes",
       "genero": "caballero",
       "marca": "tissot"
+    },
+    {
+      "nombre": "Reloj Tissot 5",
+      "precio": 1000,
+      "imagen": "images/reloj-tissot-5.jpg",
+      "material": "",
+      "tipo": "relojes",
+      "genero": "caballero",
+      "marca": "tissot"
     }
   ]
 }
