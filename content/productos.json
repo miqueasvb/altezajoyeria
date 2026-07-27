@@ -52,6 +52,22 @@
       "tipo": "anillos",
       "genero": "dama",
       "sub": null
+    },
+    {
+      "nombre": "Pulsera Oro 1",
+      "precio": 210000,
+      "imagen": "images/pulsera-oro-18kt-1.jpg",
+      "material": "oro",
+      "tipo": "pulseras",
+      "genero": "dama"
+    },
+    {
+      "nombre": "Pulsera Oro 2",
+      "precio": 220000,
+      "imagen": "images/pulsera-oro-18kt-2.jpg",
+      "material": "oro",
+      "tipo": "pulseras",
+      "genero": "dama"
     }
   ]
 }
