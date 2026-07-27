@@ -10,7 +10,7 @@ collections:
     label: "Página Principal"
     files:
       - name: "anuncios_topbar"
-        label: "Barra Superior de Anuncios (En movimiento)"
+        label: "Barra superior de anuncios"
         file: "content/anuncios.json"
         fields:
           - label: "Mensajes de la Marquesina"
