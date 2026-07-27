@@ -58,6 +58,20 @@ collections:
               - { label: "Precio Anterior (Tachado, opcional)", name: "old_price", widget: "string", required: false }
               - { label: "Imagen", name: "image", widget: "image" }
 
+      - name: "ofertas_json"
+        label: "Ofertas"
+        file: "content/ofertas.json"
+        fields:
+          - label: "Productos en Oferta"
+            name: "productos"
+            widget: "list"
+            summary: '{{fields.name}}'
+            fields:
+              - { label: "Título del Producto", name: "name", widget: "string" }
+              - { label: "Precio Actual (Oferta)", name: "price", widget: "string" }
+              - { label: "Precio Anterior (Tachado, opcional)", name: "old_price", widget: "string", required: false }
+              - { label: "Imagen", name: "image", widget: "image" }
+
   - name: "catalogo"
     label: "Catálogo General"
     files:
