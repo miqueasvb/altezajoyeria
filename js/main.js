@@ -331,3 +331,30 @@ async function cargarAnunciosTopBar() {
 }
 
 document.addEventListener('DOMContentLoaded', cargarAnunciosTopBar);
+
+
+
+<div id="seccion-perfumes" class="site-section pb-0">
+  <div class="container">
+    <div class="row">
+      <div class="title-section mb-5 col-12">
+        <div style="display: flex; align-items: center;">
+          <h2 class="text-uppercase" style="margin-right: 25px; font-weight: 900; letter-spacing: 5px; font-size: 24px; color: #1a1a1a; margin-bottom: 0; white-space: nowrap;">
+            <span style="position: relative; display: inline-block;">
+              <span style="position: absolute; top: -32px; left: 50%; transform: translateX(-50%); color: #b3925d;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5M19 19C19 19.55 18.55 20 18 20H6C5.45 20 5 19.55 5 19V18H19V19Z"/>
+                </svg>
+              </span>
+              Ofertas
+            </span>
+          </h2>
+          <div style="flex-grow: 1; height: 1px; background: #ccc;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contenedor dinámico donde Javascript renderizará los productos -->
+    <div class="row" id="contenedor-ofertas"></div>
+  </div>
+</div>
