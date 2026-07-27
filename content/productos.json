@@ -1,42 +1,6 @@
 {
   "productos": [
     {
-      "nombre": "Reloj Tissot 8",
-      "precio": 8888,
-      "imagen": "images/reloj-tissot-8.jpg",
-      "material": "",
-      "tipo": "relojes",
-      "genero": "caballero",
-      "marca": "tissot"
-    },
-    {
-      "nombre": "Reloj Tissot 7",
-      "precio": 1000,
-      "imagen": "images/reloj-tissot-7.jpg",
-      "material": "",
-      "tipo": "relojes",
-      "genero": "caballero",
-      "marca": "tissot"
-    },
-    {
-      "nombre": "Reloj Tissot 6",
-      "precio": 1000,
-      "imagen": "images/reloj-tissot-6.jpg",
-      "material": "",
-      "tipo": "relojes",
-      "genero": "caballero",
-      "marca": "tissot"
-    },
-    {
-      "nombre": "Reloj Tissot 5",
-      "precio": 1000,
-      "imagen": "images/reloj-tissot-5.jpg",
-      "material": "",
-      "tipo": "relojes",
-      "genero": "caballero",
-      "marca": "tissot"
-    },
-    {
       "nombre": "Reloj Tissot 4",
       "precio": 1000,
       "imagen": "images/reloj-tissot-4.jpg",
@@ -71,6 +35,23 @@
       "tipo": "relojes",
       "genero": "caballero",
       "marca": "tissot"
+    },
+    {
+      "nombre": "Anillo Oro 1",
+      "precio": 100000,
+      "imagen": "images/anillo-oro-1.jpg",
+      "material": "oro",
+      "tipo": "anillos",
+      "genero": "dama"
+    },
+    {
+      "nombre": "Anillo Oro 2",
+      "precio": 150000,
+      "imagen": "images/anillo-oro-2.jpg",
+      "material": "oro",
+      "tipo": "anillos",
+      "genero": "dama",
+      "sub": null
     }
   ]
 }
