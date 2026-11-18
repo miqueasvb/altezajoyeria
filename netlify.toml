@@ -1,5 +1,6 @@
 [build]
   publish = "."
+  command = "echo 'Sitio estatico: sin build'"
   # Sin comando de build: las fotos ya llegan optimizadas desde el panel
   # (antes corría optimize.js en cada deploy, recomprimiendo todas las imágenes).
 
