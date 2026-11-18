@@ -17,6 +17,7 @@
 
     <link rel="stylesheet" href="css/aos.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/alteza-app.css?v=1">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400;1,500&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap">
@@ -692,24 +693,8 @@
     <script src="js/jquery.magnific-popup.min.js"></script>
     <script src="js/aos.js"></script>
     <script src="js/main.js"></script>
-
-  <script>
-  $(document).ready(function() {
-    $('body').on('click', '.open-modal', function(e) {
-      e.preventDefault(); e.stopPropagation();
-      var name = $(this).data('name'), price = $(this).data('price'), img = $(this).data('img');
-      var phone = "5493644305999";
-      var message = encodeURIComponent("¡Hola Alteza! Me interesa el producto: " + name + " (" + price + ")");
-      $("#modalTitle").text(name); $("#modalPrice").text(price); $("#modalImg").attr("src", img);
-      $("#modalWhatsapp").attr("href", "https://wa.me/" + phone + "?text=" + message);
-      if (typeof $('#productModal').modal === "function") { $('#productModal').modal('show'); }
-      else { $('#productModal').addClass('show').css('display', 'block'); $('body').addClass('modal-open').append('<div class="modal-backdrop fade show"></div>'); }
-    });
-    $('body').on('click', '[data-dismiss="modal"], .modal-backdrop', function() {
-      $('#productModal').removeClass('show').css('display', 'none'); $('.modal-backdrop').remove(); $('body').removeClass('modal-open');
-    });
-  });
-  </script>
+    <script src="/api/catalogo.js"></script>
+    <script src="js/alteza-app.js?v=1"></script>
 
   <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -717,11 +702,12 @@
         <div class="modal-body p-0">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position: absolute; right: 15px; top: 10px; z-index: 10; font-size: 30px;"><span aria-hidden="true">&times;</span></button>
           <div class="row no-gutters">
-            <div class="col-md-6 bg-light d-flex align-items-center justify-content-center p-4"><img src="" id="modalImg" class="img-fluid" alt="Producto"></div>
+            <div class="col-md-6 bg-light d-flex align-items-center justify-content-center p-4"><div class="modal-gallery"><img src="" id="modalImg" class="img-fluid" alt="Producto"><div id="modalThumbs" class="modal-thumbs"></div></div></div>
             <div class="col-md-6 p-5">
               <span id="modalCategory" style="color: #b89a5b; text-transform: uppercase; letter-spacing: 2px; font-size: 12px;">Colección Alteza</span>
               <h2 id="modalTitle" class="mt-2" style="font-weight: 900; color: #000; text-transform: uppercase;"></h2>
               <h3 id="modalPrice" class="mb-4" style="color: #1a1a1a; font-weight: 300;"></h3>
+              <p id="modalDesc"></p>
               <a href="" id="modalWhatsapp" target="_blank" class="btn-alteza-minimal"><span class="icon-whatsapp"></span><span>Consultar por WhatsApp</span></a>
             </div>
           </div>
@@ -754,23 +740,8 @@
   <script>
   (function () {
 
-    /* ---------- Generador de productos de ejemplo ---------- */
-    function gen(tipo, material, genero, sub, marca, baseName, basePrice, img, count) {
-      var arr = [];
-      for (var i = 1; i <= count; i++) {
-        var price = basePrice + (i - 1) * 12000;
-        var discount = (i % 3 === 0);
-        arr.push({
-          tipo: tipo, material: material, genero: genero || null, sub: sub || null, marca: marca || null,
-          name: baseName + ' ' + (['I','II','III','IV','V'][i-1] || i),
-          price: discount ? Math.round(price * 0.82 / 100) * 100 : price,
-          oldPrice: discount ? price : null,
-          img: img,
-          matLabel: material === 'oro' ? 'Oro 18k' : (material === 'plata' ? 'Plata 925' : (material === 'plata-oro' ? 'Plata y Oro' : null))
-        });
-      }
-      return arr;
-    }
+    /* ---------- Productos: los carga el dueño desde /admin (ver js/alteza-app.js) ---------- */
+    var PRODUCTOS = (window.Alteza && window.Alteza.productos) || [];
 
     var TIPO_LABELS = { anillos:'Anillos', aros:'Aros', cadenas:'Cadenas', pulseras:'Pulseras', dijes:'Dijes y Colgantes', cintillos:'Cintillos', alianzas:'Alianzas', relojes:'Relojería' };
 
@@ -782,6 +753,13 @@
     var countEl = document.getElementById('resultCount');
     var ordenSelect = document.getElementById('ordenSelect');
     var loadMoreBtn = document.getElementById('btnLoadMore');
+
+    if (!PRODUCTOS.length) {
+      emptyEl.querySelector('h3').textContent = 'Estamos preparando el catálogo';
+      emptyEl.querySelector('p').textContent = 'Muy pronto vas a ver nuestras piezas acá. Mientras tanto, consultanos por WhatsApp.';
+      document.getElementById('verTodoBtn').style.display = 'none';
+      emptyEl.insertAdjacentHTML('beforeend', '<a href="https://wa.me/5493644305999" target="_blank" rel="noopener">Consultar por WhatsApp</a>');
+    }
 
     function formatPrice(n) { return '$' + n.toLocaleString('es-AR'); }
 
@@ -830,7 +808,8 @@
       if (!categoryMatch(p, f, excludeGroup)) return false;
       if (excludeGroup !== 'genero' && f.genero.length && f.genero.indexOf(p.genero) === -1) return false;
       if (excludeGroup !== 'sub' && f.sub.length && f.sub.indexOf(p.sub) === -1) return false;
-      if (excludeGroup !== 'price') {
+      if (excludeGroup !== 'price' && (f.priceMin != null || f.priceMax != null)) {
+        if (p.consultar) return false;
         if (f.priceMin != null && p.price < f.priceMin) return false;
         if (f.priceMax != null && p.price > f.priceMax) return false;
       }
@@ -839,31 +818,13 @@
 
     function sortProducts(list) {
       var mode = ordenSelect.value, copy = list.slice();
-      if (mode === 'precio-asc') copy.sort(function (a, b) { return a.price - b.price; });
-      else if (mode === 'precio-desc') copy.sort(function (a, b) { return b.price - a.price; });
+      if (mode === 'precio-asc') copy.sort(function (a, b) { return a.consultar !== b.consultar ? (a.consultar ? 1 : -1) : a.price - b.price; });
+      else if (mode === 'precio-desc') copy.sort(function (a, b) { return a.consultar !== b.consultar ? (a.consultar ? 1 : -1) : b.price - a.price; });
       else if (mode === 'nombre-asc') copy.sort(function (a, b) { return a.name.localeCompare(b.name); });
       return copy;
     }
 
-    function renderCard(p) {
-      var precioHtml = p.oldPrice
-        ? '<span class="anterior">' + formatPrice(p.oldPrice) + '</span><span class="actual">' + formatPrice(p.price) + '</span>'
-        : '<span class="actual">' + formatPrice(p.price) + '</span>';
-      var off = p.oldPrice ? '<span class="producto-off">' + Math.round((1 - p.price / p.oldPrice) * 100) + '% OFF</span>' : '';
-      var matLabel = p.matLabel ? '<span class="producto-material">' + p.matLabel + '</span>' : (p.marca ? '<span class="producto-material">Relojería</span>' : '');
-
-      return (
-        '<div class="col-6 col-md-6 col-lg-4">' +
-          '<a href="#" class="producto-card open-modal" data-name="' + p.name + '" data-price="' + formatPrice(p.price) + '" data-img="' + p.img + '">' +
-            '<div class="producto-imgwrap">' + off + '<img src="' + p.img + '" alt="' + p.name + '"></div>' +
-            matLabel +
-            '<div class="producto-nombre">' + p.name + '</div>' +
-            '<div class="producto-precio">' + precioHtml + '</div>' +
-            '<span class="producto-consultar">Consultar →</span>' +
-          '</a>' +
-        '</div>'
-      );
-    }
+    function renderCard(p) { return window.Alteza.catalogCard(p); }
 
     var MATERIAL_LABELS = { oro: 'Oro 18k', plata: 'Plata 925', 'plata-oro': 'Plata y Oro' };
     var MARCA_LABELS = { citizen:'Citizen', casio:'Casio', festina:'Festina', swatch:'Swatch', tissot:'Tissot', seiko:'Seiko', cat:'Cat', orient:'Orient', 'tommy-hilfiger':'Tommy Hilfiger', tressa:'Tressa', election:'Election', lacoste:'Lacoste', 'calvin-klein':'Calvin Klein', 'knock-out':'Knock Out' };

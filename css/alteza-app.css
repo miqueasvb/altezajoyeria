@@ -1,0 +1,27 @@
+/* Alteza · estilos de lo que arma js/alteza-app.js (galería del modal, barra de anuncios, avisos) */
+
+/* Galería del modal de producto */
+.modal-gallery { width: 100%; text-align: center; }
+.modal-gallery #modalImg { max-height: 62vh; width: auto; margin: 0 auto; object-fit: contain; }
+.modal-thumbs { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
+.modal-thumbs:empty { display: none; }
+.modal-thumb { width: 58px; height: 58px; padding: 0; border: 1px solid #ddd; background: #fff; cursor: pointer; opacity: .7; transition: opacity .2s, border-color .2s; }
+.modal-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.modal-thumb:hover, .modal-thumb.is-active { opacity: 1; border-color: #b3925d; }
+.modal-thumb:focus-visible { outline: 2px solid #b3925d; outline-offset: 2px; }
+
+/* Precio dentro del modal */
+#modalPrice del { color: #999; font-size: .62em; margin-right: 10px; }
+#modalPrice .modal-off { display: inline-block; background: #1a1a1a; color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 1px; padding: 2px 8px; margin-left: 10px; vertical-align: middle; }
+#modalDesc { font-size: 14px; line-height: 1.7; color: #777; white-space: pre-line; margin-bottom: 1.5rem; }
+#modalDesc:empty { display: none; }
+
+/* Mensaje cuando todavía no hay productos cargados */
+.alteza-vacio { text-align: center; padding: 30px 15px 10px; }
+.alteza-vacio p { font-size: 15px; color: #777; margin-bottom: 20px; }
+.alteza-vacio .btn-alteza-minimal { max-width: 320px; margin: 0 auto; }
+
+/* Barra superior de anuncios: respeta a quien pidió menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .announcement-slider { animation: none !important; }
+}

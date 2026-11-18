@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /api/admin/
 
 # Permitir explícitamente a los bots de IA (GEO / AEO)
 User-agent: GPTBot
@@ -14,5 +16,5 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
-# Ruta del Mapa del Sitio
+# Mapa del sitio (se genera solo, con las categorías que tienen productos) y catálogo en JSON para IA
 Sitemap: https://altezajoyeria.com.ar/sitemap.xml

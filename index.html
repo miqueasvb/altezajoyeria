@@ -36,6 +36,7 @@
   <link rel="stylesheet" href="css/owl.theme.default.min.css">
   <link rel="stylesheet" href="css/aos.css">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/alteza-app.css?v=1">
 
   <link rel="icon" type="image/png" href="images/iconoweb.png">
   <link rel="apple-touch-icon" href="images/iconoweb.png">
@@ -141,7 +142,7 @@
 
 
 <div class="top-bar-announcement" id="topBarAnnouncement">
-  <!-- JavaScript inyectará las pistas dinámicamente -->
+  <!-- js/alteza-app.js completa esta barra con los mensajes que se editan desde /admin -->
 </div>
 
     <div class="site-wrap">
@@ -758,26 +759,8 @@ header.site-navbar .container {
       </div>
     </div>
     
-    <!-- Aquí van tus tarjetas con el bucle de Jekyll -->
-    <div class="row" id="contenedor-destacados">
-      {% for p in site.data.alteza_destacados.productos_destacados_list %}
-      <div class="col-lg-4 col-md-6 item-entry mb-4">
-        <a href="#" class="product-item md-height bg-gray d-block open-modal" 
-           data-name="{{ p.titulo }}" 
-           data-price="{{ p.precio }}" 
-           data-img="{{ p.imagen }}">
-          <img src="{{ p.imagen }}" alt="{{ p.titulo }}" class="img-fluid">
-        </a>
-        <h2 class="item-title"><a href="#">{{ p.titulo }}</a></h2>
-        <strong class="item-price">
-          {% if p.precio_anterior != "" and p.precio_anterior != nil %}
-            <del>{{ p.precio_anterior }}</del>
-          {% endif %}
-          {{ p.precio }}
-        </strong>
-      </div>
-      {% endfor %}
-    </div>
+    <!-- Lo completa js/alteza-app.js con los productos cargados desde /admin -->
+    <div class="row" id="contenedor-destacados"></div>
   </div>
 </div>
 
@@ -915,24 +898,8 @@ header.site-navbar .container {
     <script src="js/jquery.magnific-popup.min.js"></script>
     <script src="js/aos.js"></script>
     <script src="js/main.js"></script>
-
-  <script>
-  $(document).ready(function() {
-    $('body').on('click', '.open-modal', function(e) {
-      e.preventDefault(); e.stopPropagation();
-      var name = $(this).data('name'), price = $(this).data('price'), img = $(this).data('img');
-      var phone = "5493644305999";
-      var message = encodeURIComponent("¡Hola Alteza! Me interesa el producto: " + name + " (" + price + ")");
-      $("#modalTitle").text(name); $("#modalPrice").text(price); $("#modalImg").attr("src", img);
-      $("#modalWhatsapp").attr("href", "https://wa.me/" + phone + "?text=" + message);
-      if (typeof $('#productModal').modal === "function") { $('#productModal').modal('show'); }
-      else { $('#productModal').addClass('show').css('display', 'block'); $('body').addClass('modal-open').append('<div class="modal-backdrop fade show"></div>'); }
-    });
-    $('body').on('click', '[data-dismiss="modal"], .modal-backdrop', function() {
-      $('#productModal').removeClass('show').css('display', 'none'); $('.modal-backdrop').remove(); $('body').removeClass('modal-open');
-    });
-  });
-  </script>
+    <script src="/api/catalogo.js"></script>
+    <script src="js/alteza-app.js?v=1"></script>
 
   <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -940,13 +907,12 @@ header.site-navbar .container {
         <div class="modal-body p-0">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position: absolute; right: 15px; top: 10px; z-index: 10; font-size: 30px;"><span aria-hidden="true">&times;</span></button>
           <div class="row no-gutters">
-            <div class="col-md-6 bg-light d-flex align-items-center justify-content-center p-4"><img src="" id="modalImg" class="img-fluid" alt="Producto"></div>
+            <div class="col-md-6 bg-light d-flex align-items-center justify-content-center p-4"><div class="modal-gallery"><img src="" id="modalImg" class="img-fluid" alt="Producto"><div id="modalThumbs" class="modal-thumbs"></div></div></div>
             <div class="col-md-6 p-5">
               <span id="modalCategory" style="color: #b89a5b; text-transform: uppercase; letter-spacing: 2px; font-size: 12px;">Colección Alteza</span>
               <h2 id="modalTitle" class="mt-2" style="font-weight: 900; color: #000; text-transform: uppercase;"></h2>
               <h3 id="modalPrice" class="mb-4" style="color: #1a1a1a; font-weight: 300;"></h3>
-              <p id="modalDesc" style="font-size: 14px; color: #777;">Pieza exclusiva de diseño artesanal, fabricada bajo los más altos estándares de calidad. Incluye estuche premium y certificado de autenticidad.</p>
-              <ul class="list-unstyled mb-4" style="font-size: 13px; color: #000;"><li><span class="icon-check text-success"></span> Entrega inmediata</li><li><span class="icon-check text-success"></span> Garantía</li></ul>
+              <p id="modalDesc"></p>
               <a href="" id="modalWhatsapp" target="_blank" class="btn-alteza-minimal"><span class="icon-whatsapp"></span><span>Consultar por WhatsApp</span></a>
             </div>
           </div>
@@ -973,86 +939,7 @@ header.site-navbar .container {
   });
   </script>
 
-<script>
-  async function cargarDestacados() {
-    try {
-      // Keystatic guarda los JSON en content/destacados/ (puedes listar o precargar un índice)
-      // O si preferís una integración ultra rápida por fetch de archivos estáticos:
-      const response = await fetch('./content/destacados/index.json'); // O la lista de slugs
-      // Si prefieres gestionarlo por API de GitHub o cargarlos directamente:
-    } catch (e) {
-      console.log("Cargando productos por defecto o esperando conexión con panel...");
-    }
-  }
-  cargarDestacados();
-</script>
-    
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-  fetch('content/destacados.json')
-    .then(response => response.json())
-    .then(data => {
-      const contenedor = document.getElementById('contenedor-destacados');
-      contenedor.innerHTML = '';
 
-      data.productos.forEach(prod => {
-        // Armar el HTML del precio (manejando si tiene descuento o no)
-        let precioHtml = `<strong class="item-price">${prod.price}</strong>`;
-        if (prod.old_price && prod.old_price.trim() !== "") {
-          precioHtml = `<strong class="item-price"><del>${prod.old_price}</del> ${prod.price}</strong>`;
-        }
-
-        // Construir la estructura respetando tus clases y atributos para el modal
-        const tarjetaHTML = `
-          <div class="col-lg-4 col-md-6 item-entry mb-4">
-            <a href="#" class="product-item md-height bg-gray d-block open-modal" 
-               data-name="${prod.name}" 
-               data-price="${prod.price}" 
-               data-img="${prod.image}">
-              <img src="${prod.image}" alt="${prod.name}" class="img-fluid">
-            </a>
-            <h2 class="item-title"><a href="#">${prod.name}</a></h2>
-            ${precioHtml}
-          </div>
-        `;
-        contenedor.innerHTML += tarjetaHTML;
-      });
-
-      // Asegurar que el modal lea los datos dinámicos al hacer clic
-      inicializarModalDinamico();
-    })
-    .catch(error => console.error("Error al cargar los destacados:", error));
-});
-
-function inicializarModalDinamico() {
-  const triggers = document.querySelectorAll('.open-modal');
-  
-  triggers.forEach(trigger => {
-    trigger.addEventListener('click', function(e) {
-      e.preventDefault();
-      
-      // Capturamos los datos del producto clickeado
-      const nombre = this.getAttribute('data-name');
-      const precio = this.getAttribute('data-price');
-      const imagen = this.getAttribute('data-img');
-      
-      // ACÁ CONECTÁS CON LOS ELEMENTOS DE TU MODAL VISUAL
-      // (Reemplazá los selectores según cómo tengas armado el HTML de tu pop-up modal)
-      const modalTitle = document.querySelector('.modal-product-title'); // Reemplazá por tu clase/id del título en el modal
-      const modalPrice = document.querySelector('.modal-product-price'); // Reemplazá por tu clase/id del precio en el modal
-      const modalImage = document.querySelector('.modal-product-image'); // Reemplazá por tu clase/id de la img en el modal
-
-      if (modalTitle) modalTitle.textContent = nombre;
-      if (modalPrice) modalPrice.textContent = precio;
-      if (modalImage) modalImage.setAttribute('src', imagen);
-
-      // Si usás Bootstrap nativo por código, podés abrirlo así (si ya lo abre tu script original, podés omitir esto):
-      // var myModal = new bootstrap.Modal(document.getElementById('tuModalId'));
-      // myModal.show();
-    });
-  });
-}
-    </script>
     
   </div><!-- /.site-wrap -->
   </div><!-- /.site-navbar -->

@@ -1,10 +1,11 @@
 {
   "name": "alteza-joyeria",
-  "version": "1.0.0",
-  "scripts": {
-    "build": "node optimize.js"
-  },
+  "version": "2.0.0",
+  "private": true,
+  "description": "Alteza Joyería: sitio estático + panel de productos (Netlify Functions y Netlify Blobs)",
+  "engines": { "node": ">=22.12" },
   "dependencies": {
-    "sharp": "^0.33.2"
+    "@netlify/blobs": "^11.1.9",
+    "@netlify/cache": "^4.2.1"
   }
 }

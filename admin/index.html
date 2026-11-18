@@ -1,32 +1,661 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="es-AR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Panel de Administración - Alteza</title>
+<meta charset="utf-8">
+<title>Panel · Alteza Joyería</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#16161A">
+<link rel="icon" type="image/png" href="/images/iconoweb.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Mukta:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F3F3F5;--tinta:#16161A;--gris:#6B6B76;--borde:#D9D9DF;--oro:#B3925D;--oro-osc:#8A6E3F;--oro-suave:#F4ECDD;--rojo:#B42318;--ok:#1F7A4D}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;font-family:'Mukta',system-ui,sans-serif;background:var(--bg);color:var(--tinta);line-height:1.5;font-size:17px;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+h1,h2,h3,p{margin:0}
+.muted{color:var(--gris);font-size:.92rem}
+.serif{font-family:'Cormorant Garamond',Georgia,serif}
+
+/* Botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:48px;padding:0 22px;border-radius:12px;border:1.5px solid var(--borde);background:#fff;font-weight:600;font-size:.98rem;cursor:pointer;text-decoration:none;color:var(--tinta);transition:background .2s,border-color .2s,transform .1s}
+.btn:hover{border-color:var(--tinta)}
+.btn:active{transform:scale(.98)}
+.btn:disabled{opacity:.55;cursor:default}
+.btn-pri{background:var(--tinta);border-color:var(--tinta);color:#fff}
+.btn-pri:hover{background:#2C2C34;border-color:#2C2C34}
+.btn-sm{height:40px;padding:0 14px;font-size:.88rem;border-radius:10px}
+.btn-peligro{color:var(--rojo)}
+.btn-peligro:hover{border-color:var(--rojo)}
+:focus-visible{outline:3px solid var(--oro);outline-offset:2px}
+.icon-btn{width:44px;height:44px;border:0;border-radius:50%;background:var(--bg);cursor:pointer;font-size:1.1rem;line-height:1}
+
+/* Campos */
+.fld{display:block}
+.lbl{display:block;font-size:.86rem;font-weight:600;color:var(--gris);margin:0 0 6px}
+input:not([type=checkbox]):not([type=file]),select,textarea{display:block;width:100%;min-height:48px;border:1px solid var(--borde);border-radius:12px;background:#fff;padding:0 14px;font-size:1rem;font-weight:500;outline:0}
+textarea{padding:12px 14px;resize:vertical;line-height:1.6}
+input:focus,select:focus,textarea:focus{border-color:var(--oro);box-shadow:0 0 0 3px rgba(179,146,93,.25)}
+.hint{font-size:.82rem;color:var(--gris);margin-top:5px}
+.seg{display:flex;background:var(--bg);border-radius:12px;padding:4px;gap:4px}
+.seg button{flex:1;border:0;background:none;border-radius:9px;padding:11px 10px;font-weight:600;font-size:.94rem;color:var(--gris);cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--tinta);color:#fff}
+
+/* Ingreso */
+.login{min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:24px}
+.login-box{width:100%;max-width:400px;background:#fff;border:1px solid var(--borde);border-top:3px solid var(--oro);border-radius:20px;padding:34px 30px;display:flex;flex-direction:column;gap:16px;box-shadow:0 30px 60px -40px rgba(22,22,26,.5)}
+.login-logo{height:46px;width:auto;align-self:flex-start}
+.login-box h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:2rem;font-weight:700;line-height:1.1}
+.error{color:var(--rojo);font-weight:600;font-size:.9rem;min-height:1.2em}
+
+/* Aplicación */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-bottom:2px solid var(--oro)}
+.top-in{max-width:1100px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:14px}
+.top-in img{height:36px;width:auto}
+.top-in .marca{font-family:'Cormorant Garamond',Georgia,serif;font-weight:700;font-size:1.35rem}
+.top-in .sp{flex:1}
+.menu{position:relative}
+.menu summary{list-style:none;cursor:pointer}
+.menu summary::-webkit-details-marker{display:none}
+.menu-lista{position:absolute;right:0;top:calc(100% + 8px);min-width:210px;background:#fff;border:1px solid var(--borde);border-radius:14px;padding:6px;box-shadow:0 20px 40px -20px rgba(0,0,0,.4);display:flex;flex-direction:column}
+.menu-lista a,.menu-lista button{display:block;width:100%;text-align:left;border:0;background:none;padding:12px 14px;border-radius:9px;cursor:pointer;font-weight:600;font-size:.96rem;text-decoration:none;color:var(--tinta)}
+.menu-lista a:hover,.menu-lista button:hover{background:var(--bg)}
+.wrap{max-width:1100px;margin:0 auto;padding:22px 20px 110px}
+.barra{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+.barra .buscar{flex:1;min-width:180px}
+.barra select{width:auto;min-width:150px}
+.contador{font-size:.92rem;color:var(--gris);font-weight:600;margin-bottom:12px}
+
+.fila{display:grid;grid-template-columns:88px minmax(0,1fr) auto;gap:16px;align-items:center;background:#fff;border:1px solid var(--borde);border-radius:16px;padding:12px;margin-bottom:10px}
+.fila.pausada{opacity:.6}
+.thumb{width:88px;height:88px;border-radius:12px;background:#E4E4E8;overflow:hidden;display:flex;align-items:center;justify-content:center;color:#A1A1AA;font-size:1.6rem}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.fila h3{font-size:1.05rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fila .sub{font-size:.88rem;color:var(--gris);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;align-items:center}
+.tag{font-size:.78rem;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--bg)}
+.tag.dest{background:var(--oro-suave);color:var(--oro-osc)}
+.tag.ofe{background:var(--tinta);color:#fff}
+.tag.pausa{background:#FEF3C7;color:#92400E}
+.precio{font-weight:700;font-size:1rem;margin-left:2px}
+.precio del{color:var(--gris);font-weight:500;font-size:.85rem;margin-right:6px}
+.acc{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;max-width:360px}
+.vacio{text-align:center;background:#fff;border:1px dashed var(--borde);border-radius:18px;padding:44px 22px}
+.vacio h3{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.7rem;margin-bottom:8px}
+.vacio ol{display:inline-block;text-align:left;margin:14px 0 20px;padding-left:20px;color:var(--gris)}
+.fab{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom));z-index:15;box-shadow:0 14px 30px -10px rgba(22,22,26,.6);height:54px;padding:0 26px;font-size:1.02rem;display:none}
+
+/* Editor */
+.overlay{position:fixed;inset:0;z-index:50;background:rgba(22,22,26,.55);backdrop-filter:blur(3px);display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:24px 12px}
+.sheet{width:100%;max-width:720px;background:#fff;border-radius:22px;overflow:hidden;margin:auto 0;box-shadow:0 40px 80px -30px rgba(0,0,0,.6)}
+.sheet-head{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;border-bottom:1px solid var(--borde);position:sticky;top:0;background:#fff;z-index:2}
+.sheet-head h2{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.6rem;font-weight:700}
+.sheet-body{padding:22px 24px;display:flex;flex-direction:column;gap:18px}
+.sheet-foot{display:flex;gap:10px;justify-content:flex-end;align-items:center;padding:14px 24px;border-top:1px solid var(--borde);background:#FAFAFB;position:sticky;bottom:0}
+.sheet-foot .estado{flex:1;font-size:.86rem;color:var(--gris);font-weight:600}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.sec{font-size:.92rem;font-weight:700;color:var(--oro-osc);padding-top:8px;border-top:1px solid var(--borde)}
+.sec:first-child{border:0;padding:0}
+.fotos{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
+.foto{position:relative;aspect-ratio:1/1;border-radius:14px;overflow:hidden;background:#E4E4E8;border:1px solid var(--borde)}
+.foto img{width:100%;height:100%;object-fit:cover;display:block}
+.foto .portada{position:absolute;top:6px;left:6px;font-size:.72rem;font-weight:700;background:var(--oro);color:var(--tinta);padding:2px 9px;border-radius:999px}
+.foto .portada:empty{display:none}
+.foto-acc{position:absolute;left:0;right:0;bottom:0;display:flex;gap:4px;padding:6px;background:linear-gradient(0deg,rgba(0,0,0,.65),transparent)}
+.foto-acc button{flex:1;height:32px;border:0;border-radius:8px;background:rgba(255,255,255,.93);cursor:pointer;font-weight:700}
+.foto-acc button:disabled{opacity:.35;cursor:default}
+.foto-acc .rm{color:var(--rojo)}
+.foto.add{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border:2px dashed var(--oro);background:var(--oro-suave);cursor:pointer;font-size:2rem;font-weight:300;color:var(--oro-osc)}
+.foto.add small{font-size:.86rem;font-weight:700}
+.check{display:flex;gap:12px;align-items:flex-start;cursor:pointer}
+.check input{width:22px;height:22px;margin-top:2px;accent-color:var(--tinta);flex:none}
+.check b{display:block;font-size:1rem}
+dialog{border:0;border-radius:20px;padding:0;max-width:440px;width:calc(100% - 24px);box-shadow:0 40px 80px -30px rgba(0,0,0,.6)}
+dialog::backdrop{background:rgba(22,22,26,.55)}
+dialog form{padding:26px;display:flex;flex-direction:column;gap:14px}
+dialog h2{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.5rem;font-weight:700}
+.fila-btns{display:flex;gap:10px;justify-content:flex-end;margin-top:4px}
+
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);z-index:100;background:var(--tinta);color:#fff;font-weight:600;font-size:.96rem;padding:13px 22px;border-radius:14px;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;max-width:calc(100% - 28px);text-align:center}
+#toast.on{opacity:1;transform:translateX(-50%)}
+#toast.mal{background:var(--rojo)}
+
+@media (max-width:640px){
+  body{font-size:16px}
+  .wrap{padding:16px 14px 110px}
+  .fila{grid-template-columns:76px minmax(0,1fr);gap:12px}
+  .thumb{width:76px;height:76px}
+  .acc{grid-column:1/-1;max-width:none;display:grid;grid-template-columns:1fr 1fr}
+  .overlay{padding:0}
+  .sheet{border-radius:0;min-height:100%;margin:0}
+  .sheet-body{padding:18px 16px}
+  .sheet-head,.sheet-foot{padding-left:16px;padding-right:16px}
+  .top-in .marca{display:none}
+  .fab{display:inline-flex}
+  .barra{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .barra .buscar{grid-column:1/-1;min-width:0}
+  .barra select{width:100%;min-width:0}
+  #btnNuevo,.solo-pc{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
 </head>
 <body>
-  <!-- Scripts de Netlify Identity y Decap CMS -->
-  <script src="https://identity.netlify.com/v1/netlify-identity.js"></script>
-  <script src="https://unpkg.com/decap-cms@^3.0/dist/decap-cms.js"></script>
 
-  <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
-        }
-      });
+<!-- ============ Ingreso ============ -->
+<main id="login" class="login" hidden>
+  <form class="login-box" id="formLogin">
+    <img class="login-logo" src="/images/alteza-logo-navbar.png" alt="Alteza Joyería" onerror="this.remove()">
+    <div>
+      <h1>Panel de productos</h1>
+      <p class="muted">Ingresá con tu usuario y contraseña.</p>
+    </div>
+    <label class="fld"><span class="lbl">Usuario</span><input id="lUser" autocomplete="username" autocapitalize="none" required autofocus></label>
+    <label class="fld"><span class="lbl">Contraseña</span><input id="lPass" type="password" autocomplete="current-password" required></label>
+    <p class="error" id="lErr" role="alert"></p>
+    <button class="btn btn-pri" type="submit" id="lBtn">Ingresar</button>
+  </form>
+</main>
 
-      // Si hay un token de invitación en la URL, abrimos directamente en modo de registro/configuración
-      if (window.location.hash && window.location.hash.includes('invite_token')) {
-        window.netlifyIdentity.on('init', () => {
-          window.netlifyIdentity.open('signup');
-        });
-      }
+<!-- ============ Panel ============ -->
+<div id="app" hidden>
+  <header class="top">
+    <div class="top-in">
+      <img src="/images/alteza-logo-navbar.png" alt="" onerror="this.remove()">
+      <span class="marca">Panel de productos</span>
+      <span class="sp"></span>
+      <details class="menu" id="menu">
+        <summary class="btn btn-sm" aria-label="Abrir menú">Menú ▾</summary>
+        <div class="menu-lista">
+          <a href="/" target="_blank" rel="noopener">Ver la web</a>
+          <button type="button" id="btnAnuncios">Anuncios de la barra superior</button>
+          <button type="button" id="btnClave">Cambiar contraseña</button>
+          <button type="button" id="btnSalir">Salir</button>
+        </div>
+      </details>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="barra">
+      <input class="buscar" id="qLista" type="search" placeholder="Buscar producto…" aria-label="Buscar">
+      <select id="fCat" aria-label="Categoría"><option value="">Categorías</option></select>
+      <select id="fEstado" aria-label="Estado">
+        <option value="">Todos</option>
+        <option value="on">Publicados</option>
+        <option value="off">Pausados</option>
+      </select>
+      <button class="btn btn-pri" id="btnNuevo" type="button">＋ Nuevo producto</button>
+    </div>
+    <p class="contador" id="contador"></p>
+    <div id="lista"></div>
+  </main>
+  <button class="btn btn-pri fab" id="btnNuevoFab" type="button">＋ Nuevo producto</button>
+</div>
+
+<!-- ============ Editor ============ -->
+<div class="overlay" id="editor" hidden>
+  <form class="sheet" id="formProd" novalidate>
+    <header class="sheet-head">
+      <h2 id="edTitulo">Nuevo producto</h2>
+      <button type="button" class="icon-btn" id="edCerrar" aria-label="Cerrar">✕</button>
+    </header>
+    <div class="sheet-body">
+      <p class="sec">Fotos</p>
+      <div>
+        <div class="fotos" id="fotos"></div>
+        <p class="hint">Sacá la foto con el celular o elegila de la galería. La primera es la portada y se reducen solas para que la web cargue rápido.</p>
+      </div>
+
+      <p class="sec">Qué es</p>
+      <label class="fld"><span class="lbl">Nombre *</span><input id="fNombre" maxlength="120" placeholder="Ej: Anillo solitario con circón"></label>
+      <div class="g2">
+        <label class="fld"><span class="lbl">Categoría *</span><select id="fTipo"></select></label>
+        <label class="fld" id="bloqueSub" hidden><span class="lbl">Detalle</span><select id="fSub"></select></label>
+        <label class="fld" id="bloqueMarca" hidden><span class="lbl">Marca</span><select id="fMarca"></select></label>
+      </div>
+      <div class="fld" id="bloqueMaterial" hidden><span class="lbl">Material *</span><div class="seg" id="segMat"></div></div>
+      <div class="fld"><span class="lbl">Para</span><div class="seg" id="segGen"></div></div>
+
+      <p class="sec">Precio</p>
+      <div class="g2">
+        <label class="fld"><span class="lbl">Precio ($)</span><input id="fPrecio" inputmode="numeric" placeholder="Vacío = “Consultar precio”"></label>
+        <label class="fld"><span class="lbl">Precio anterior ($)</span><input id="fAnterior" inputmode="numeric" placeholder="Opcional"></label>
+      </div>
+      <p class="hint" id="hintOferta">Si completás el precio anterior, se muestra tachado, con el porcentaje de descuento, y el producto aparece en “Ofertas”.</p>
+
+      <p class="sec">Detalles</p>
+      <label class="fld"><span class="lbl">Descripción (opcional)</span><textarea id="fDesc" rows="4" maxlength="1000" placeholder="Medidas, peso, piedras, garantía… lo que quieras contarle al cliente."></textarea></label>
+
+      <p class="sec">Publicación</p>
+      <label class="check"><input type="checkbox" id="fDest">
+        <span><b>Destacado en el inicio</b><span class="hint" id="hintDest">Aparece en la sección “Destacados” de la página principal.</span></span></label>
+      <label class="check"><input type="checkbox" id="fActivo" checked>
+        <span><b>Publicado en la web</b><span class="hint">Desmarcalo para ocultarlo sin borrarlo (por ejemplo, si se vendió).</span></span></label>
+    </div>
+    <footer class="sheet-foot">
+      <span class="estado" id="edEstado"></span>
+      <button type="button" class="btn" id="edCancelar">Cancelar</button>
+      <button type="submit" class="btn btn-pri" id="edGuardar">Guardar</button>
+    </footer>
+  </form>
+</div>
+
+<!-- ============ Precio rápido ============ -->
+<dialog id="dlgPrecio">
+  <form id="formPrecio" method="dialog">
+    <h2 id="pTitulo">Cambiar precio</h2>
+    <label class="fld"><span class="lbl">Precio ($)</span><input id="pPrecio" inputmode="numeric" placeholder="Vacío = “Consultar precio”"></label>
+    <label class="fld"><span class="lbl">Precio anterior ($, opcional)</span><input id="pAnterior" inputmode="numeric" placeholder="Para mostrarlo como oferta"></label>
+    <p class="error" id="pErr" role="alert"></p>
+    <div class="fila-btns">
+      <button type="button" class="btn" id="pCancelar">Cancelar</button>
+      <button type="submit" class="btn btn-pri" id="pGuardar">Guardar</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- ============ Anuncios ============ -->
+<dialog id="dlgAnuncios">
+  <form id="formAnuncios" method="dialog">
+    <h2>Anuncios de la barra superior</h2>
+    <label class="fld"><span class="lbl">Un mensaje por renglón</span><textarea id="aTexto" rows="6" placeholder="Ej: Envíos a todo el país"></textarea>
+      <span class="hint" id="aHint"></span></label>
+    <p class="error" id="aErr" role="alert"></p>
+    <div class="fila-btns">
+      <button type="button" class="btn" id="aCancelar">Cancelar</button>
+      <button type="submit" class="btn btn-pri" id="aGuardar">Guardar</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- ============ Cambiar contraseña ============ -->
+<dialog id="dlgClave">
+  <form id="formClave" method="dialog">
+    <h2>Cambiar contraseña</h2>
+    <label class="fld"><span class="lbl">Contraseña actual</span><input type="password" id="cActual" autocomplete="current-password" required></label>
+    <label class="fld"><span class="lbl">Nueva contraseña (mínimo 8 caracteres)</span><input type="password" id="cNueva" autocomplete="new-password" minlength="8" required></label>
+    <label class="fld"><span class="lbl">Repetir nueva contraseña</span><input type="password" id="cRep" autocomplete="new-password" minlength="8" required></label>
+    <p class="error" id="cErr" role="alert"></p>
+    <div class="fila-btns">
+      <button type="button" class="btn" id="cCancelar">Cancelar</button>
+      <button type="submit" class="btn btn-pri" id="cGuardar">Guardar</button>
+    </div>
+  </form>
+</dialog>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var esc = function (t) { return String(t == null ? '' : t).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+  var miles = function (n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.'); };
+  var norm = function (t) { return String(t || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase(); };
+  var num = function (v) { return parseInt(String(v).replace(/\D/g, ''), 10) || 0; };
+  var foto = function (k, m) { return '/media/' + k + (m ? '-m' : '') + '.jpg'; };
+
+  var items = [], anuncios = [], tax = { tipos: {}, materiales: {}, combos: {}, generos: {}, subs: {}, marcas: {} };
+  var lim = { fotos: 4, destacados: 6, anuncios: 6 };
+  var edit = null, fotos = [], material = '', genero = '', dirty = false, limpiado = false, precioId = null;
+
+  /* ---------- Interfaz ---------- */
+  var toastT;
+  function aviso(msg, mal) {
+    var t = $('toast'); t.textContent = msg; t.className = 'on' + (mal ? ' mal' : '');
+    clearTimeout(toastT); toastT = setTimeout(function () { t.className = ''; }, mal ? 5500 : 2800);
+  }
+
+  async function api(ruta, o) {
+    o = o || {};
+    var h = { 'x-requested-with': 'panel' };
+    if (o.json) h['content-type'] = 'application/json';
+    if (o.headers) Object.assign(h, o.headers);
+    var r = await fetch('/api/admin/' + ruta, { method: o.method || 'GET', credentials: 'same-origin', headers: h, body: o.json ? JSON.stringify(o.json) : o.body });
+    var d = await r.json().catch(function () { return {}; });
+    if (r.status === 401 && ruta !== 'login') { mostrarLogin(); throw new Error('Tu sesión venció. Volvé a ingresar.'); }
+    if (!r.ok) throw new Error(d.error || ('Error ' + r.status));
+    return d;
+  }
+
+  function mostrarLogin() { $('app').hidden = true; $('editor').hidden = true; $('login').hidden = false; $('lPass').value = ''; document.body.style.overflow = ''; }
+  function mostrarApp() { $('login').hidden = true; $('app').hidden = false; }
+
+  /* ---------- Sesión ---------- */
+  $('formLogin').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    var b = $('lBtn'); b.disabled = true; $('lErr').textContent = '';
+    try {
+      await api('login', { method: 'POST', json: { usuario: $('lUser').value.trim(), clave: $('lPass').value } });
+      await cargar(); mostrarApp();
+    } catch (err) { $('lErr').textContent = err.message; }
+    b.disabled = false;
+  });
+  $('btnSalir').addEventListener('click', async function () { try { await api('logout', { method: 'POST' }); } catch (e) {} mostrarLogin(); });
+  document.addEventListener('click', function (e) { var m = $('menu'); if (m.open && !m.contains(e.target)) m.open = false; });
+  $('menu').addEventListener('click', function (e) { if (e.target.closest('.menu-lista')) $('menu').open = false; });
+
+  async function cargar() {
+    var d = await api('catalogo');
+    items = d.items; anuncios = d.anuncios; tax = d.taxonomia; lim = d.limites;
+    armarSelects(); pintarLista();
+    if (!limpiado) { limpiado = true; api('limpieza', { method: 'POST' }).catch(function () {}); }   // borra fotos que quedaron sin usar
+  }
+
+  function opciones(obj, vacio) {
+    return (vacio ? '<option value="">' + esc(vacio) + '</option>' : '') + Object.keys(obj).map(function (k) { return '<option value="' + esc(k) + '">' + esc(obj[k]) + '</option>'; }).join('');
+  }
+  function armarSelects() {
+    $('fCat').innerHTML = opciones(tax.tipos, 'Categorías');
+    $('fTipo').innerHTML = opciones(tax.tipos, 'Elegí una categoría…');
+    $('fMarca').innerHTML = opciones(tax.marcas, 'Otra marca / sin marca');
+  }
+
+  /* ---------- Listado ---------- */
+  function precioTxt(p) {
+    if (!p.precio) return 'Consultar';
+    return (p.precioAnterior ? '<del>$ ' + miles(p.precioAnterior) + '</del>' : '') + '$ ' + miles(p.precio);
+  }
+  function detalle(p) {
+    return [tax.tipos[p.tipo], p.tipo === 'relojes' ? tax.marcas[p.marca] : tax.materiales[p.material], tax.generos[p.genero], (tax.subs[p.tipo] || {})[p.sub]].filter(Boolean).join(' · ');
+  }
+  function urlWeb(p) {
+    return '/catalogo?tipo=' + encodeURIComponent(p.tipo) + (p.tipo === 'relojes' ? (p.marca ? '&marca=' + encodeURIComponent(p.marca) : '') : '&material=' + encodeURIComponent(p.material));
+  }
+  function nDest() { return items.filter(function (x) { return x.destacado && x.activo !== false; }).length; }
+
+  function pintarLista() {
+    var q = norm($('qLista').value), est = $('fEstado').value, cat = $('fCat').value;
+    var r = items.filter(function (p) {
+      var on = p.activo !== false;
+      if (est === 'on' && !on) return false;
+      if (est === 'off' && on) return false;
+      if (cat && p.tipo !== cat) return false;
+      return !q || norm([p.nombre, detalle(p), p.desc].join(' ')).indexOf(q) >= 0;
+    }).sort(function (a, b) { return a.fecha < b.fecha ? 1 : a.fecha > b.fecha ? -1 : b.id - a.id; });
+
+    var np = items.filter(function (x) { return x.activo !== false; }).length;
+    $('contador').textContent = items.length
+      ? items.length + (items.length === 1 ? ' producto' : ' productos') + ' · ' + np + ' publicados · ' + (items.length - np) + ' pausados · ★ ' + nDest() + '/' + lim.destacados + ' destacados' + (r.length !== items.length ? ' (mostrando ' + r.length + ')' : '')
+      : '';
+    if (!r.length) {
+      $('lista').innerHTML = items.length
+        ? '<div class="vacio"><h3>Ninguno coincide</h3><p class="muted">Probá con otra palabra o cambiá los filtros.</p></div>'
+        : '<div class="vacio"><h3>Cargá tu primer producto</h3><ol><li>Tocá “Nuevo producto”.</li><li>Sacale una foto y escribí el nombre.</li><li>Elegí la categoría y el material. ¡Listo!</li></ol><br><button class="btn btn-pri solo-pc" type="button" data-a="nuevo">＋ Nuevo producto</button><p class="hint" style="margin-top:14px">En cuanto lo guardes, aparece en tu página web.</p></div>';
+      return;
     }
-  </script>
+    $('lista').innerHTML = r.map(function (p) {
+      var on = p.activo !== false;
+      var pct = p.precio && p.precioAnterior > p.precio ? Math.round((1 - p.precio / p.precioAnterior) * 100) : 0;
+      return '<article class="fila' + (on ? '' : ' pausada') + '" data-id="' + p.id + '">' +
+        '<div class="thumb">' + (p.imgs && p.imgs[0] ? '<img src="' + esc(foto(p.imgs[0], 1)) + '" alt="" loading="lazy" onerror="this.remove()">' : '◇') + '</div>' +
+        '<div style="min-width:0"><h3>' + esc(p.nombre) + '</h3><p class="sub">' + esc(detalle(p)) + '</p>' +
+        '<div class="tags">' + (on ? '' : '<span class="tag pausa">Pausado</span>') + (p.destacado ? '<span class="tag dest">★ Destacado</span>' : '') +
+        (pct ? '<span class="tag ofe">' + pct + '% OFF</span>' : '') + '<span class="precio">' + precioTxt(p) + '</span></div></div>' +
+        '<div class="acc"><button class="btn btn-sm" data-a="editar">Editar</button>' +
+        '<button class="btn btn-sm" data-a="precio">Precio</button>' +
+        (on ? '<button class="btn btn-sm" data-a="destacar">' + (p.destacado ? '★ Quitar' : '☆ Destacar') + '</button>' : '') +
+        (on ? '<a class="btn btn-sm" href="' + esc(urlWeb(p)) + '" target="_blank" rel="noopener">Ver en la web</a>' : '') +
+        '<button class="btn btn-sm" data-a="pausar">' + (on ? 'Pausar' : 'Publicar') + '</button>' +
+        '<button class="btn btn-sm btn-peligro" data-a="borrar">Eliminar</button></div></article>';
+    }).join('');
+  }
+  $('qLista').addEventListener('input', pintarLista);
+  $('fEstado').addEventListener('change', pintarLista);
+  $('fCat').addEventListener('change', pintarLista);
+
+  function conCambios(p, cambios) { return Object.assign({}, p, cambios); }
+  function reemplazar(item) { items = items.map(function (x) { return x.id === item.id ? item : x; }); }
+
+  $('lista').addEventListener('click', async function (e) {
+    var b = e.target.closest('[data-a]'); if (!b) return;
+    if (b.dataset.a === 'nuevo') return abrirEditor(null);
+    var fila = b.closest('[data-id]'); if (!fila) return;
+    var id = parseInt(fila.getAttribute('data-id'), 10);
+    var p = items.filter(function (x) { return x.id === id; })[0]; if (!p) return;
+
+    if (b.dataset.a === 'editar') return abrirEditor(p);
+    if (b.dataset.a === 'precio') return abrirPrecio(p);
+    b.disabled = true;
+    try {
+      if (b.dataset.a === 'destacar') {
+        var marcar = !p.destacado;
+        if (marcar && nDest() >= lim.destacados) { aviso('Ya hay ' + lim.destacados + ' destacados. Quitá uno para destacar otro.', true); b.disabled = false; return; }
+        var r1 = await api('prod/' + id, { method: 'PUT', json: conCambios(p, { destacado: marcar }) });
+        reemplazar(r1.item); aviso(marcar ? 'Destacado en el inicio' : 'Ya no está destacado');
+      } else if (b.dataset.a === 'pausar') {
+        var r2 = await api('prod/' + id, { method: 'PUT', json: conCambios(p, { activo: p.activo === false }) });
+        reemplazar(r2.item); aviso(r2.item.activo ? 'Producto publicado' : 'Producto pausado: ya no se ve en la web');
+      } else if (b.dataset.a === 'borrar') {
+        if (!confirm('¿Eliminar “' + p.nombre + '”?\n\nSe borra el producto y sus fotos. No se puede deshacer.\n(Si solo querés ocultarlo, usá “Pausar”.)')) { b.disabled = false; return; }
+        await api('prod/' + id, { method: 'DELETE' });
+        items = items.filter(function (x) { return x.id !== id; });
+        aviso('Producto eliminado');
+      }
+      pintarLista();
+    } catch (err) { aviso(err.message, true); b.disabled = false; }
+  });
+
+  /* ---------- Precio rápido ---------- */
+  function abrirPrecio(p) {
+    precioId = p.id; $('pTitulo').textContent = p.nombre; $('pErr').textContent = '';
+    $('pPrecio').value = p.precio ? miles(p.precio) : ''; $('pAnterior').value = p.precioAnterior ? miles(p.precioAnterior) : '';
+    $('dlgPrecio').showModal();
+  }
+  [['pPrecio'], ['pAnterior'], ['fPrecio'], ['fAnterior']].forEach(function (a) {
+    $(a[0]).addEventListener('input', function () { var n = num(this.value); this.value = n ? miles(n) : ''; });
+  });
+  $('pCancelar').addEventListener('click', function () { $('dlgPrecio').close(); });
+  $('formPrecio').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    var p = items.filter(function (x) { return x.id === precioId; })[0]; if (!p) return;
+    $('pGuardar').disabled = true; $('pErr').textContent = '';
+    try {
+      var r = await api('prod/' + p.id, { method: 'PUT', json: conCambios(p, { precio: num($('pPrecio').value), precioAnterior: num($('pAnterior').value) }) });
+      reemplazar(r.item); pintarLista(); $('dlgPrecio').close(); aviso('Precio actualizado. Ya se ve en la web.');
+    } catch (err) { $('pErr').textContent = err.message; }
+    $('pGuardar').disabled = false;
+  });
+
+  /* ---------- Editor ---------- */
+  function seg(id, lista, valor) {
+    $(id).innerHTML = lista.map(function (o) { return '<button type="button" data-v="' + esc(o[0]) + '" aria-pressed="' + (o[0] === valor) + '">' + esc(o[1]) + '</button>'; }).join('');
+  }
+  function pintarGenero() { seg('segGen', [['dama', tax.generos.dama || 'Dama'], ['caballero', tax.generos.caballero || 'Caballero'], ['', 'No aplica']], genero); }
+  function pintarMaterial(tipo) {
+    var perm = tax.combos[tipo] || [];
+    if (perm.indexOf(material) < 0) material = '';
+    seg('segMat', perm.map(function (k) { return [k, tax.materiales[k] || k]; }), material);
+  }
+  function ajustar(subValor) {
+    var tipo = $('fTipo').value, reloj = tipo === 'relojes', subs = tax.subs[tipo];
+    $('bloqueMaterial').hidden = !tipo || reloj;
+    $('bloqueMarca').hidden = !reloj;
+    $('bloqueSub').hidden = !subs;
+    if (subs) $('fSub').innerHTML = opciones(subs, 'Sin especificar');
+    if (subs && subValor && subs[subValor]) $('fSub').value = subValor;
+    if (tipo && !reloj) pintarMaterial(tipo);
+  }
+  $('fTipo').addEventListener('change', function () { ajustar(''); });
+  $('segMat').addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) { material = b.dataset.v; dirty = true; pintarMaterial($('fTipo').value); } });
+  $('segGen').addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) { genero = b.dataset.v; dirty = true; pintarGenero(); } });
+
+  function abrirEditor(p) {
+    edit = p || null;
+    $('edTitulo').textContent = p ? 'Editar producto' : 'Nuevo producto';
+    $('fNombre').value = p ? p.nombre : '';
+    $('fTipo').value = p ? p.tipo : '';
+    material = p ? p.material || '' : ''; genero = p ? p.genero || '' : '';
+    pintarGenero(); ajustar(p ? p.sub : '');
+    $('fMarca').value = p && p.marca ? p.marca : '';
+    $('fPrecio').value = p && p.precio ? miles(p.precio) : '';
+    $('fAnterior').value = p && p.precioAnterior ? miles(p.precioAnterior) : '';
+    $('fDesc').value = p ? p.desc || '' : '';
+    $('fDest').checked = !!(p && p.destacado); $('fActivo').checked = p ? p.activo !== false : true;
+    $('hintDest').textContent = 'Aparece en “Destacados” de la página principal (hay ' + nDest() + ' de ' + lim.destacados + ').';
+    fotos = (p ? p.imgs : []).map(function (k) { return { key: k, url: foto(k, 1), listo: true, orig: true }; });
+    pintarFotos(); dirty = false; $('edEstado').textContent = '';
+    $('editor').hidden = false; document.body.style.overflow = 'hidden';
+    $('editor').scrollTop = 0;
+  }
+  function cerrarEditor() {
+    fotos.forEach(function (f) { if (f.obj) URL.revokeObjectURL(f.obj); });
+    $('editor').hidden = true; document.body.style.overflow = ''; edit = null;
+  }
+  $('btnNuevo').addEventListener('click', function () { abrirEditor(null); });
+  $('btnNuevoFab').addEventListener('click', function () { abrirEditor(null); });
+  function pedirCerrar() {
+    if (dirty && !confirm('Tenés cambios sin guardar. ¿Salir igual?')) return;
+    fotos.forEach(function (f) { if (f.listo && !f.orig) api('img?k=' + f.key, { method: 'DELETE' }).catch(function () {}); });
+    cerrarEditor();
+  }
+  $('formProd').addEventListener('input', function () { dirty = true; });
+  $('edCerrar').addEventListener('click', pedirCerrar);
+  $('edCancelar').addEventListener('click', pedirCerrar);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !$('editor').hidden && !document.querySelector('dialog[open]')) pedirCerrar(); });
+
+  /* Fotos */
+  function pintarFotos() {
+    $('fotos').innerHTML = fotos.map(function (f, i) {
+      return '<div class="foto" data-i="' + i + '" draggable="true" title="Arrastrá para cambiar el orden"><img src="' + esc(f.url) + '" alt="Foto ' + (i + 1) + '" onerror="this.style.opacity=.2">' +
+        '<span class="portada">' + (i === 0 ? 'Portada' : '') + '</span><div class="foto-acc">' +
+        '<button type="button" data-mv="-1"' + (i === 0 ? ' disabled' : '') + ' aria-label="Mover antes">←</button>' +
+        '<button type="button" data-mv="1"' + (i === fotos.length - 1 ? ' disabled' : '') + ' aria-label="Mover después">→</button>' +
+        '<button type="button" class="rm" data-rm aria-label="Quitar foto">✕</button></div></div>';
+    }).join('') + (fotos.length < lim.fotos ? '<label class="foto add" for="inFotos">＋<small>' + (fotos.length ? 'Otra foto' : 'Agregar foto') + '</small></label>' : '');
+  }
+  var inFotos = document.createElement('input');
+  inFotos.type = 'file'; inFotos.id = 'inFotos'; inFotos.accept = 'image/*'; inFotos.multiple = true; inFotos.hidden = true;
+  document.body.appendChild(inFotos);
+
+  $('fotos').addEventListener('click', function (e) {
+    var card = e.target.closest('.foto[data-i]'); if (!card) return;
+    var i = parseInt(card.dataset.i, 10), mv = e.target.closest('[data-mv]');
+    if (mv) { var j = i + parseInt(mv.dataset.mv, 10); var t = fotos[i]; fotos[i] = fotos[j]; fotos[j] = t; dirty = true; pintarFotos(); }
+    else if (e.target.closest('[data-rm]')) { var q = fotos.splice(i, 1)[0]; if (q.obj) URL.revokeObjectURL(q.obj); if (q.listo && !q.orig) api('img?k=' + q.key, { method: 'DELETE' }).catch(function () {}); dirty = true; pintarFotos(); }
+  });
+  var arrastrando = -1;
+  $('fotos').addEventListener('dragstart', function (e) { var c = e.target.closest('.foto[data-i]'); if (!c) return; arrastrando = +c.dataset.i; c.style.opacity = .4; e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', ''); });
+  $('fotos').addEventListener('dragend', function () { arrastrando = -1; pintarFotos(); });
+  $('fotos').addEventListener('dragover', function (e) { if (arrastrando >= 0 && e.target.closest('.foto[data-i]')) e.preventDefault(); });
+  $('fotos').addEventListener('drop', function (e) {
+    var c = e.target.closest('.foto[data-i]'); if (!c || arrastrando < 0) return; e.preventDefault();
+    var a = fotos.splice(arrastrando, 1)[0]; fotos.splice(+c.dataset.i, 0, a); arrastrando = -1; dirty = true; pintarFotos();
+  });
+
+  // Reduce la foto en el celular antes de subirla: una de 5 MB queda en ~250 KB sin perder nitidez visible
+  async function escalar(bmp, max, q, maxKB) {
+    var k = Math.min(1, max / Math.max(bmp.width, bmp.height)), w = Math.round(bmp.width * k), h = Math.round(bmp.height * k);
+    var c = document.createElement('canvas'); c.width = w; c.height = h;
+    var x = c.getContext('2d'); x.imageSmoothingQuality = 'high'; x.fillStyle = '#fff'; x.fillRect(0, 0, w, h); x.drawImage(bmp, 0, 0, w, h);
+    var b;
+    for (; q >= 0.5; q -= 0.07) { b = await new Promise(function (res) { c.toBlob(res, 'image/jpeg', q); }); if (b.size <= maxKB * 1024) break; }
+    return b;
+  }
+  async function procesar(file) {
+    var bmp;
+    try { bmp = await createImageBitmap(file, { imageOrientation: 'from-image' }); }
+    catch (e) { try { bmp = await createImageBitmap(file); } catch (e2) { throw new Error('No pude leer la foto “' + file.name + '”'); } }
+    var r = { full: await escalar(bmp, 1400, 0.86, 350), thumb: await escalar(bmp, 720, 0.8, 90) };
+    if (bmp.close) bmp.close();
+    return r;
+  }
+  inFotos.addEventListener('change', async function () {
+    var files = Array.prototype.slice.call(inFotos.files); inFotos.value = '';
+    var cupo = lim.fotos - fotos.length; if (files.length > cupo) { files = files.slice(0, cupo); aviso('Máximo ' + lim.fotos + ' fotos por producto', true); }
+    var antes = 0, despues = 0;
+    for (var i = 0; i < files.length; i++) {
+      $('edEstado').textContent = 'Preparando foto ' + (i + 1) + ' de ' + files.length + '…';
+      try {
+        var b = await procesar(files[i]); antes += files[i].size; despues += b.full.size;
+        var key = 'p-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7).replace(/[^a-z0-9]/g, 'x');
+        var obj = URL.createObjectURL(b.thumb);
+        fotos.push({ key: key, url: obj, obj: obj, blob: b, listo: false });
+        dirty = true; pintarFotos();
+      } catch (err) { aviso(err.message, true); }
+    }
+    $('edEstado').textContent = antes ? 'Foto optimizada: ' + (antes / 1048576).toFixed(1) + ' MB → ' + Math.round(despues / 1024) + ' KB' : '';
+  });
+
+  async function subirFoto(f) {
+    var h = { 'content-type': 'image/jpeg' };
+    await api('img?k=' + f.key, { method: 'POST', body: f.blob.full, headers: h });
+    await api('img?k=' + f.key + '&m=1', { method: 'POST', body: f.blob.thumb, headers: h });
+    f.listo = true; f.blob = null;
+  }
+
+  /* Guardar */
+  $('formProd').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    var nombre = $('fNombre').value.trim(), tipo = $('fTipo').value, reloj = tipo === 'relojes';
+    if (!fotos.length) { aviso('Agregá al menos una foto', true); return; }
+    if (!nombre) { aviso('Escribí el nombre del producto', true); $('fNombre').focus(); return; }
+    if (!tipo) { aviso('Elegí la categoría', true); $('fTipo').focus(); return; }
+    if (!reloj && !material) { aviso('Elegí el material', true); return; }
+
+    var btn = $('edGuardar'); btn.disabled = true;
+    try {
+      var nuevas = fotos.filter(function (f) { return !f.listo; });
+      for (var i = 0; i < nuevas.length; i++) {
+        $('edEstado').textContent = 'Subiendo foto ' + (i + 1) + ' de ' + nuevas.length + '…';
+        await subirFoto(nuevas[i]);
+      }
+      $('edEstado').textContent = 'Guardando…';
+      var rec = Object.assign({}, edit || {}, {
+        nombre: nombre, tipo: tipo, material: reloj ? '' : material, genero: genero,
+        sub: $('bloqueSub').hidden ? '' : $('fSub').value, marca: reloj ? $('fMarca').value : '',
+        precio: num($('fPrecio').value), precioAnterior: num($('fAnterior').value), desc: $('fDesc').value.trim(),
+        imgs: fotos.map(function (f) { return f.key; }), destacado: $('fDest').checked, activo: $('fActivo').checked
+      });
+      var r = edit ? await api('prod/' + edit.id, { method: 'PUT', json: rec }) : await api('prod', { method: 'POST', json: rec });
+      if (edit) reemplazar(r.item); else items.push(r.item);
+      cerrarEditor(); pintarLista();
+      aviso(rec.activo ? 'Guardado. Ya se ve en la web.' : 'Guardado (pausado: no se ve en la web).');
+    } catch (err) { aviso(err.message, true); $('edEstado').textContent = ''; }
+    btn.disabled = false;
+  });
+
+  /* ---------- Anuncios ---------- */
+  $('btnAnuncios').addEventListener('click', function () {
+    $('aTexto').value = anuncios.join('\n'); $('aErr').textContent = '';
+    $('aHint').textContent = 'Se muestran en la barra de arriba de la página de inicio (hasta ' + lim.anuncios + '). Si lo dejás vacío, la barra no se muestra.';
+    $('dlgAnuncios').showModal();
+  });
+  $('aCancelar').addEventListener('click', function () { $('dlgAnuncios').close(); });
+  $('formAnuncios').addEventListener('submit', async function (e) {
+    e.preventDefault(); $('aGuardar').disabled = true; $('aErr').textContent = '';
+    try {
+      var r = await api('anuncios', { method: 'PUT', json: { anuncios: $('aTexto').value.split('\n') } });
+      anuncios = r.anuncios; $('dlgAnuncios').close(); aviso('Anuncios guardados. Ya se ven en la web.');
+    } catch (err) { $('aErr').textContent = err.message; }
+    $('aGuardar').disabled = false;
+  });
+
+  /* ---------- Cambiar contraseña ---------- */
+  var dlg = $('dlgClave');
+  $('btnClave').addEventListener('click', function () { $('formClave').reset(); $('cErr').textContent = ''; dlg.showModal(); });
+  $('cCancelar').addEventListener('click', function () { dlg.close(); });
+  $('formClave').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    if ($('cNueva').value !== $('cRep').value) { $('cErr').textContent = 'Las contraseñas nuevas no coinciden'; return; }
+    $('cGuardar').disabled = true;
+    try {
+      await api('password', { method: 'POST', json: { actual: $('cActual').value, nueva: $('cNueva').value } });
+      dlg.close(); aviso('Contraseña actualizada');
+    } catch (err) { $('cErr').textContent = err.message; }
+    $('cGuardar').disabled = false;
+  });
+
+  /* ---------- Inicio ---------- */
+  (async function () {
+    try { await api('me'); await cargar(); mostrarApp(); }
+    catch (e) { mostrarLogin(); }
+  })();
+})();
+</script>
 </body>
 </html>
