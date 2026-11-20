@@ -495,6 +495,9 @@
             </div>
           </div>
 
+          <div class="cat-tabs" id="catTabs" role="tablist" aria-label="Categorías"></div>
+          <div class="cat-chips" id="catChips"></div>
+
           <div class="cat-toolbar">
             <button type="button" class="btn-filtros-mobile" id="btnFiltrosMobile"><span>☰</span> Filtrar</button>
             <button type="button" class="cat-limpiar" id="filtrosClear">Limpiar filtros</button>
@@ -685,6 +688,7 @@
     </div>
   </footer>
 
+    <link rel="stylesheet" href="css/alteza-catalogo.css?v=2">
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/jquery-ui.js"></script>
     <script src="js/popper.min.js"></script>
@@ -698,18 +702,25 @@
 
   <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-      <div class="modal-content" style="border-radius: 0; border: none;">
-        <div class="modal-body p-0">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position: absolute; right: 15px; top: 10px; z-index: 10; font-size: 30px;"><span aria-hidden="true">&times;</span></button>
-          <div class="row no-gutters">
-            <div class="col-md-6 bg-light d-flex align-items-center justify-content-center p-4"><div class="modal-gallery"><img src="" id="modalImg" class="img-fluid" alt="Producto"><div id="modalThumbs" class="modal-thumbs"></div></div></div>
-            <div class="col-md-6 p-5">
-              <span id="modalCategory" style="color: #b89a5b; text-transform: uppercase; letter-spacing: 2px; font-size: 12px;">Colección Alteza</span>
-              <h2 id="modalTitle" class="mt-2" style="font-weight: 900; color: #000; text-transform: uppercase;"></h2>
-              <h3 id="modalPrice" class="mb-4" style="color: #1a1a1a; font-weight: 300;"></h3>
-              <p id="modalDesc"></p>
-              <a href="" id="modalWhatsapp" target="_blank" class="btn-alteza-minimal"><span class="icon-whatsapp"></span><span>Consultar por WhatsApp</span></a>
+      <div class="modal-content">
+        <button type="button" class="close pm-close" data-dismiss="modal" aria-label="Cerrar"><span aria-hidden="true">&times;</span></button>
+        <div class="row no-gutters">
+          <div class="col-md-6 pm-img">
+            <div class="modal-gallery">
+              <div class="pm-stage">
+                <img src="" id="modalImg" alt="Producto">
+                <button type="button" class="pm-nav pm-prev" aria-label="Foto anterior">&#8249;</button>
+                <button type="button" class="pm-nav pm-next" aria-label="Foto siguiente">&#8250;</button>
+              </div>
+              <div id="modalThumbs" class="modal-thumbs"></div>
             </div>
+          </div>
+          <div class="col-md-6 pm-info">
+            <span id="modalCategory">Colección Alteza</span>
+            <h2 id="modalTitle"></h2>
+            <h3 id="modalPrice"></h3>
+            <p id="modalDesc"></p>
+            <a href="" id="modalWhatsapp" target="_blank" class="btn-alteza-minimal"><span class="icon-whatsapp"></span><span>Consultar por WhatsApp</span></a>
           </div>
         </div>
       </div>
@@ -1060,5 +1071,6 @@
   </script>
 
   </div><!-- /.site-wrap -->
+    <script src="js/alteza-catalogo.js?v=2"></script>
   </body>
 </html>
