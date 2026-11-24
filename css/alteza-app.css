@@ -1,0 +1,161 @@
+/* Componentes dinámicos de Alteza */
+.top-bar-announcement {
+  overflow: hidden;
+  white-space: nowrap;
+  background: #171717;
+  color: #fff;
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+}
+.alteza-announcement-track {
+  display: flex;
+  width: max-content;
+  animation: alteza-marquee 32s linear infinite;
+}
+.alteza-announcement-group {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.alteza-announcement-item {
+  display: inline-block;
+  padding: 8px 22px;
+  font-size: 10px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+.alteza-announcement-separator {
+  color: #b3925d;
+  font-size: 10px;
+}
+.top-bar-announcement:hover .alteza-announcement-track {
+  animation-play-state: paused;
+}
+@keyframes alteza-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.alteza-product-card {
+  height: 100%;
+  background: #fff;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.alteza-product-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+}
+.alteza-product-open {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.alteza-product-image {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background: #f7f6f3;
+  aspect-ratio: 1 / 1;
+}
+.alteza-product-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .35s ease;
+}
+.alteza-product-card:hover .alteza-product-image img {
+  transform: scale(1.035);
+}
+.alteza-no-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #b3925d;
+  font-family: Georgia, serif;
+  font-size: 22px;
+}
+.alteza-product-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 5px 9px;
+  background: #b3925d;
+  color: #fff;
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.alteza-product-info {
+  display: flex;
+  flex-direction: column;
+  padding: 13px 4px 8px;
+}
+.alteza-product-category {
+  margin-bottom: 5px;
+  color: #b3925d;
+  font-size: 9px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+.alteza-product-name {
+  min-height: 36px;
+  color: #222;
+  font-size: 13px;
+  line-height: 1.4;
+}
+.alteza-product-price {
+  margin-top: 7px;
+  color: #171717;
+  font-size: 14px;
+  font-weight: 600;
+}
+.alteza-empty-products {
+  padding: 20px 0;
+  color: #777;
+  text-align: center;
+}
+.modal-gallery {
+  width: 100%;
+}
+.modal-gallery > img {
+  display: block;
+  width: 100%;
+  max-height: 430px;
+  object-fit: contain;
+}
+.modal-thumbs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+.alteza-modal-thumb {
+  width: 54px;
+  height: 54px;
+  padding: 2px;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+}
+.alteza-modal-thumb.is-active {
+  border-color: #b3925d;
+}
+.alteza-modal-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+@media (prefers-reduced-motion: reduce) {
+  .alteza-announcement-track { animation: none; }
+  .alteza-product-card, .alteza-product-image img { transition: none; }
+}
